@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'state/function_state.dart';
 import 'state/loading_state.dart';
 import 'state/number_state.dart';
+import 'state/option_state.dart';
 
 class MyConfig {
   // アプリの仮想幅
@@ -16,5 +17,6 @@ class MyConfig {
     'calc.loading': (BuildContext context) => const MyLoadingWidget(),
     'calc.number': (BuildContext context) => const MyNumberWidget(),
     'calc.function': (BuildContext context) => const MyFunctionWidget(),
+    'calc.option': (BuildContext context) => const MyOptionWidget(),
   };
 }

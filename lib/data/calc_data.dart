@@ -19,6 +19,11 @@ class CalcData {
   static int errorTypeNegativeInfinity = 2;
   static int errorTypeNotANumber       = 3;
 
+  // 桁区切り
+  static int separatorTypeNone = 0;
+  static int separatorTypeDash = 1;
+  static int separatorTypeComma = 2;
+
   // 計算結果
   double answer = 0.0;
 
@@ -43,12 +48,18 @@ class CalcData {
   bool errorFlag = false;
   int errorType = -1;
 
+  // オプション
+  bool italicFlag = false;
+  int separatorType = separatorTypeNone;
+
   Future<bool> load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     answer = prefs.getDouble( "answer" ) ?? 0.0;
     memory = prefs.getDouble( "memory" ) ?? 0.0;
     memoryRecalled = prefs.getBool( "memoryRecalled" ) ?? false;
     angleType = prefs.getInt( "angleType" ) ?? angleTypeRad;
+    italicFlag = prefs.getBool( "italicFlag" ) ?? false;
+    separatorType = prefs.getInt( "separatorType" ) ?? separatorTypeNone;
     return true;
   }
 
@@ -56,11 +67,15 @@ class CalcData {
   static int saveMemory         = 0x00000002;
   static int saveMemoryRecalled = 0x00000004;
   static int saveAngleType      = 0x00000008;
+  static int saveItalicFlag     = 0x00000010;
+  static int saveSeparatorType  = 0x00000020;
   void save( int flag ) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if( (flag & saveAnswer        ) != 0 ){ await prefs.setDouble( "answer", answer ); }
     if( (flag & saveMemory        ) != 0 ){ await prefs.setDouble( "memory", memory ); }
     if( (flag & saveMemoryRecalled) != 0 ){ await prefs.setBool( "memoryRecalled", memoryRecalled ); }
     if( (flag & saveAngleType     ) != 0 ){ await prefs.setInt( "angleType", angleType ); }
+    if( (flag & saveItalicFlag    ) != 0 ){ await prefs.setBool( "italicFlag", italicFlag ); }
+    if( (flag & saveSeparatorType ) != 0 ){ await prefs.setInt( "separatorType", separatorType ); }
   }
 }

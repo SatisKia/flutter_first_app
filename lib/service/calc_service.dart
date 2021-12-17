@@ -62,6 +62,86 @@ class CalcService {
     return str1 + str2;
   }
 
+  // 桁区切り
+  String sepString( String str, String sep ){
+    try {
+      double tmp = double.parse(str);
+      if( tmp.isInfinite || tmp.isNaN ){
+        return str;
+      }
+    } catch( e ){
+      return str;
+    }
+
+    String src = '';
+    String dst = '';
+    int top;
+    int end;
+    bool _float;
+    bool _break;
+    int len;
+
+    src = str;
+    dst = '';
+    top = 0;
+    while( true ){
+      _float = false;
+
+      // 先頭を求める
+      _break = false;
+      for( ; top < src.length; top++ ){
+        switch( src.substring( top, top + 1 ) ){
+          case '+':
+          case '-':
+          case '.':
+          case 'e':
+          case 'E':
+            if( src.substring( top, top + 1 ) == '.' ){
+              _float = true;
+            }
+            dst += src.substring( top, top + 1 );
+            break;
+          default:
+            _break = true;
+            break;
+        }
+        if( _break ){
+          break;
+        }
+      }
+      if( top >= src.length ){
+        break;
+      }
+
+      // 末尾を求める
+      _break = false;
+      for( end = top + 1; end < src.length; end++ ){
+        switch( src.substring( end, end + 1 ) ){
+          case '+':
+          case '-':
+          case '.':
+          case 'e':
+          case 'E':
+            _break = true;
+            break;
+        }
+        if( _break ){
+          break;
+        }
+      }
+
+      for( len = end - top; len > 0; len-- ){
+        dst += src.substring( top, top + 1 );
+        top++;
+        if( !_float && (len != 1) && ((len % 3) == 1) ){
+          dst += sep;
+        }
+      }
+    }
+
+    return dst;
+  }
+
   // 入力値
   void updateEntryStr( testFlag ){
     if( !MyData.calc.entryFlag ){
@@ -266,7 +346,10 @@ class CalcService {
   }
 
   void funcInt(){
-    clearAndSetEntry( getEntry().toInt().toDouble() );
+    try {
+      clearAndSetEntry( getEntry().toInt().toDouble() );
+    } catch(e){
+    }
   }
 
   // 演算の予約

@@ -2,16 +2,36 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
+import '../data.dart';
+import '../data/calc_data.dart';
+import '../service.dart';
 import '../state/number_state.dart';
 import '../widget/common_widget.dart';
 
 Column numberView( MyNumberState state ){
   double height = state.getContentHeight().toDouble() - 20 - 50 - 20;
 
+  // 桁区切り
+  String dispStr = state.dispStr;
+  if (MyData.calc.separatorType == CalcData.separatorTypeDash) {
+    dispStr = MyService.calc.sepString(dispStr, "'");
+  } else if (MyData.calc.separatorType == CalcData.separatorTypeComma) {
+    dispStr = MyService.calc.sepString(dispStr, ",");
+  }
+
   return MyColumn( children: [
-    MyDisplay( state, state.dispLog, 320, 20, 17, Alignment.topLeft ),
-    MyDisplay( state, state.dispStr, 320, 50, 29, Alignment.centerRight ),
-    MyDisplay( state, "A = ${state.dispAnswer}  M = ${state.dispMemory}", 320, 20, 17, Alignment.bottomLeft ),
+    InkWell(
+      onTap: () { state.go('calc.option', state.routeName); },
+      child: MyDisplay( state, state.dispLog, 320, 20, 17, Alignment.topLeft ),
+    ),
+    InkWell(
+      onTap: () { state.go('calc.option', state.routeName); },
+      child: MyDisplay( state, dispStr, 320, 50, 29, Alignment.centerRight ),
+    ),
+    InkWell(
+      onTap: () { state.go('calc.option', state.routeName); },
+      child: MyDisplay( state, "A = ${state.dispAnswer}  M = ${state.dispMemory}", 320, 20, 17, Alignment.bottomLeft ),
+    ),
     MyRow( children: [
       MyButton( state, "M+", 80, height * 3 ~/ 23, 25, 0x000000, 0xC0C0FF, state.onButtonMAdd ),
       MyButton( state, "M-", 80, height * 3 ~/ 23, 25, 0x000000, 0xC0C0FF, state.onButtonMSub ),
