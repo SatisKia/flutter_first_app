@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-import '../data.dart';
 import '../main.dart';
 import '../utility.dart';
 
@@ -120,7 +119,7 @@ class MyButton extends Container {
 
 // 計算結果等の表示欄
 class MyDisplay extends Container {
-  MyDisplay( MyState state, String text, int width, int height, int fontSize, AlignmentGeometry alignment, {Key? key} ) : super(
+  MyDisplay( MyState state, String text, int width, int height, int fontSize, FontStyle fontStyle, AlignmentGeometry alignment, {Key? key} ) : super(
     key: key,
     width: state.size( width ),
     height: state.size( height ),
@@ -132,7 +131,7 @@ class MyDisplay extends Container {
           fontSize: state.size( fontSize ),
           color: MyColor( 0x000000 ),
           fontWeight: FontWeight.w200,
-          fontStyle: MyData.calc.italicFlag ? FontStyle.italic : FontStyle.normal
+          fontStyle: fontStyle
       ),
     ),
   );

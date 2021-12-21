@@ -31,6 +31,9 @@ class MyState extends State with WidgetsBindingObserver {
   double contentWidth = 0.0;
   double contentHeight = 0.0;
 
+  // 自動スクロール用
+  ScrollController? scrollController;
+
   // アプリ仮想サイズをviewサイズに変換するための係数
   double scale(){
     return contentWidth / MyConfig.contentWidth.toDouble();
@@ -47,6 +50,16 @@ class MyState extends State with WidgetsBindingObserver {
   }
 
   // 各ページでオーバーライドする関数群
+  bool autoScroll(){ return false; }
+  void onInit(){
+    // このページの構築時
+  }
+  void onDispose(){
+    // このページの解放時
+  }
+  void onReady(){
+    // ウィジェットのビルド完了時
+  }
   void onEnter(){
     // このページに入ってきた
   }
@@ -82,12 +95,26 @@ class MyState extends State with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+    onInit();
     WidgetsBinding.instance!.addObserver(this);
+    if( autoScroll() ) {
+      scrollController = ScrollController();
+    }
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      if( autoScroll() ) {
+        scrollController!.jumpTo(scrollController!.position.maxScrollExtent);
+      }
+      onReady();
+    });
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance!.removeObserver(this);
+    if( autoScroll() ){
+      scrollController!.dispose();
+    }
+    onDispose();
     super.dispose();
   }
 
@@ -120,18 +147,38 @@ class MyState extends State with WidgetsBindingObserver {
     contentWidth  = MediaQuery.of( context ).size.width;
     contentHeight = MediaQuery.of( context ).size.height - MediaQuery.of( context ).padding.top;
 
-    return Scaffold(
-        appBar: AppBar(
-            toolbarHeight: 0
-        ),
-        body: WillPopScope(
-            onWillPop: _willPopCallback,
-            child: SizedBox(
-                width: contentWidth,
-                height: contentHeight,
-                child: viewFunc( this )
-            )
+    AppBar appBar = AppBar(
+        toolbarHeight: 0
+    );
+    WillPopScope body = WillPopScope(
+        onWillPop: _willPopCallback,
+        child: SizedBox(
+            width: contentWidth,
+            height: contentHeight,
+            child: viewFunc( this )
         )
     );
+
+    if( autoScroll() ){
+      return Scaffold(
+        appBar: appBar,
+        resizeToAvoidBottomInset: false, // 自前で高さ対応する
+        body: SingleChildScrollView(
+          controller: scrollController,
+          reverse: true, // スクロールの向きを逆にする
+          child: Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of( context ).viewInsets.bottom,
+            ),
+            child: body,
+          ),
+        ),
+      );
+    } else {
+      return Scaffold(
+        appBar: appBar,
+        body: body,
+      );
+    }
   }
 }

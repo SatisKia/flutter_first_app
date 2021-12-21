@@ -9,7 +9,7 @@ import '../state/number_state.dart';
 import '../widget/common_widget.dart';
 
 Column numberView( MyNumberState state ){
-  double height = state.getContentHeight().toDouble() - 20 - 50 - 20;
+  double height = state.getContentHeight().toDouble() - 20 - 50 - 20; // 計算結果等の表示欄の高さを引いた分
 
   // 桁区切り
   String dispStr = state.dispStr;
@@ -22,15 +22,15 @@ Column numberView( MyNumberState state ){
   return MyColumn( children: [
     InkWell(
       onTap: () { state.go('calc.option', state.routeName); },
-      child: MyDisplay( state, state.dispLog, 320, 20, 17, Alignment.topLeft ),
+      child: MyDisplay( state, state.dispLog, 320, 20, 17, FontStyle.normal, Alignment.topLeft ),
     ),
     InkWell(
       onTap: () { state.go('calc.option', state.routeName); },
-      child: MyDisplay( state, dispStr, 320, 50, 29, Alignment.centerRight ),
+      child: MyDisplay( state, dispStr, 320, 50, 29, MyData.calc.italicFlag ? FontStyle.italic : FontStyle.normal, Alignment.centerRight ),
     ),
     InkWell(
       onTap: () { state.go('calc.option', state.routeName); },
-      child: MyDisplay( state, "A = ${state.dispAnswer}  M = ${state.dispMemory}", 320, 20, 17, Alignment.bottomLeft ),
+      child: MyDisplay( state, "A = ${state.dispAnswer}  M = ${state.dispMemory}", 320, 20, 17, FontStyle.normal, Alignment.bottomLeft ),
     ),
     MyRow( children: [
       MyButton( state, "M+", 80, height * 3 ~/ 23, 25, 0x000000, 0xC0C0FF, state.onButtonMAdd ),

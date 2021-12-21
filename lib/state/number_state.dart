@@ -26,23 +26,15 @@ class MyNumberState extends MyState {
 
   @override
   void onEnter(){
+    debugPrint( 'number onEnter' );
+
     MyService.calcNumber.initWithState( this );
   }
 
   @override
-  void onLeave(){
-  }
-
-  @override
-  void onPause(){
-  }
-
-  @override
-  void onResume(){
-  }
-
-  @override
   void onBack(){
+    debugPrint( 'number onBack' );
+
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -77,28 +69,65 @@ class MyNumberState extends MyState {
     FlutterFirstPlugin.vibrate();
   }
 
-  void onButtonMAdd(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.addMemory(); } ); } }
-  void onButtonMSub(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.subMemory(); } ); } }
-  void onButtonMRC(){ if( !isError() ){ vibrate(); setState( (){ if( isMemoryRecalled() ){ MyService.calcNumber.clearMemory(); } else { MyService.calcNumber.recallMemory(); } } ); } }
-  void onButtonFunction(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.setOp( CalcData.opTypeSet ); go( 'calc.function', null ); } ); } }
-  void onButtonCE(){ vibrate(); setState( (){ MyService.calcNumber.clearEntry( false ); } ); }
-  void onButtonC(){ vibrate(); setState( (){ MyService.calcNumber.clearEntry( true ); } ); }
+  void onButtonNumber( Function() function ){
+    if( !isError() ){
+      vibrate();
+      setState( function );
+    }
+  }
+  void onButtonClear( bool allFlag ){
+    vibrate();
+    setState( (){
+      MyService.calcNumber.clearEntry( allFlag );
+    } );
+  }
+  void onButtonMAdd(){ onButtonNumber( (){ MyService.calcNumber.addMemory(); } ); }
+  void onButtonMSub(){ onButtonNumber( (){ MyService.calcNumber.subMemory(); } ); }
+  void onButtonMRC(){ onButtonNumber( (){ if( isMemoryRecalled() ){ MyService.calcNumber.clearMemory(); } else { MyService.calcNumber.recallMemory(); } } ); }
+  void onButtonFunction(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeSet ); go( 'calc.function', null ); } ); }
+  void onButtonCE(){ onButtonClear( false ); }
+  void onButtonC(){ onButtonClear( true ); }
   void onButtonDEL(){ if( !isError() && isEntry() ){ vibrate(); setState( (){ MyService.calcNumber.delEntry(); } ); } }
-  void onButtonDiv(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.setOp( CalcData.opTypeDiv ); } ); } }
-  void onButtonMul(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.setOp( CalcData.opTypeMul ); } ); } }
-  void onButtonSub(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.setOp( CalcData.opTypeSub ); } ); } }
-  void onButtonAdd(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.setOp( CalcData.opTypeAdd ); } ); } }
-  void onButton0(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.addNumber( "0" ); } ); } }
-  void onButton1(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.addNumber( "1" ); } ); } }
-  void onButton2(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.addNumber( "2" ); } ); } }
-  void onButton3(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.addNumber( "3" ); } ); } }
-  void onButton4(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.addNumber( "4" ); } ); } }
-  void onButton5(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.addNumber( "5" ); } ); } }
-  void onButton6(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.addNumber( "6" ); } ); } }
-  void onButton7(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.addNumber( "7" ); } ); } }
-  void onButton8(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.addNumber( "8" ); } ); } }
-  void onButton9(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.addNumber( "9" ); } ); } }
-  void onButtonPoint(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.addPoint(); } ); } }
-  void onButtonNegative(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.negative(); } ); } }
-  void onButtonEqual(){ if( !isError() ){ vibrate(); setState( (){ MyService.calcNumber.setOp( CalcData.opTypeSet ); } ); } }
+  void onButtonDiv(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeDiv ); } ); }
+  void onButtonMul(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeMul ); } ); }
+  void onButtonSub(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeSub ); } ); }
+  void onButtonAdd(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeAdd ); } ); }
+  void onButton0(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "0" ); } ); }
+  void onButton1(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "1" ); } ); }
+  void onButton2(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "2" ); } ); }
+  void onButton3(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "3" ); } ); }
+  void onButton4(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "4" ); } ); }
+  void onButton5(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "5" ); } ); }
+  void onButton6(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "6" ); } ); }
+  void onButton7(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "7" ); } ); }
+  void onButton8(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "8" ); } ); }
+  void onButton9(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "9" ); } ); }
+  void onButtonPoint(){ onButtonNumber( (){ MyService.calcNumber.addPoint(); } ); }
+  void onButtonNegative(){ onButtonNumber( (){ MyService.calcNumber.negative(); } ); }
+  void onButtonEqual(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeSet ); } ); }
+
+  @override
+  void onInit(){
+    debugPrint( 'number onInit' );
+  }
+  @override
+  void onDispose(){
+    debugPrint( 'number onDispose' );
+  }
+  @override
+  void onReady(){
+    debugPrint( 'number onReady' );
+  }
+  @override
+  void onLeave(){
+    debugPrint( 'number onLeave' );
+  }
+  @override
+  void onPause(){
+    debugPrint( 'number onPause' );
+  }
+  @override
+  void onResume(){
+    debugPrint( 'number onResume' );
+  }
 }

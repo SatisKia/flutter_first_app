@@ -214,7 +214,7 @@ class CalcService {
   }
 
   // 入力値の操作
-  void clearEntry( allFlag ){
+  void clearEntry( bool allFlag ){
     setEntry( 0.0 );
     MyData.calc.entryStr = "0";
     MyData.calc.opFlag = false;
@@ -348,6 +348,7 @@ class CalcService {
   void funcInt(){
     try {
       clearAndSetEntry( getEntry().toInt().toDouble() );
+    // ignore: empty_catches
     } catch(e){
     }
   }

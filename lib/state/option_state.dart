@@ -15,6 +15,9 @@ class MyOptionWidget extends StatefulWidget {
 class MyOptionState extends MyState {
   MyOptionState() : super(optionView);
 
+  @override
+  bool autoScroll(){ return true; }
+
   String returnRoute = '';
 
   // イタリック
@@ -41,11 +44,40 @@ class MyOptionState extends MyState {
 
   @override
   void onEnter(){
+    debugPrint( 'option onEnter' );
+
     returnRoute = arguments as String;
   }
 
   @override
   void onBack(){
+    debugPrint( 'option onBack' );
+
     go( returnRoute, null );
+  }
+
+  @override
+  void onInit(){
+    debugPrint( 'option onInit' );
+  }
+  @override
+  void onDispose(){
+    debugPrint( 'option onDispose' );
+  }
+  @override
+  void onReady(){
+    debugPrint( 'option onReady' );
+  }
+  @override
+  void onLeave(){
+    debugPrint( 'option onLeave' );
+  }
+  @override
+  void onPause(){
+    debugPrint( 'option onPause' );
+  }
+  @override
+  void onResume(){
+    debugPrint( 'option onResume' );
   }
 }
