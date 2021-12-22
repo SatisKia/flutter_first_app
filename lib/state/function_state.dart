@@ -6,8 +6,6 @@ import '../main.dart';
 import '../service.dart';
 import '../view/function_view.dart';
 
-import 'package:flutter_first_plugin/flutter_first_plugin.dart';
-
 class MyFunctionWidget extends StatefulWidget {
   const MyFunctionWidget({Key? key}) : super(key: key);
 
@@ -47,7 +45,7 @@ class MyFunctionState extends MyState {
   }
 
   void vibrate(){
-    FlutterFirstPlugin.vibrate();
+    // TODO: 振動機能呼び出し
   }
 
   void changeAngle(){

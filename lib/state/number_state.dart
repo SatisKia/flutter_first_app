@@ -6,8 +6,6 @@ import '../main.dart';
 import '../service.dart';
 import '../view/number_view.dart';
 
-import 'package:flutter_first_plugin/flutter_first_plugin.dart';
-
 class MyNumberWidget extends StatefulWidget {
   const MyNumberWidget({Key? key}) : super(key: key);
 
@@ -66,7 +64,7 @@ class MyNumberState extends MyState {
   }
 
   void vibrate(){
-    FlutterFirstPlugin.vibrate();
+    // TODO: 振動機能呼び出し
   }
 
   void onButtonNumber( Function() function ){
