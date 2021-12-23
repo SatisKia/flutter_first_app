@@ -97,53 +97,18 @@ class MyRowSpace extends SizedBox {
   );
 }
 
-// ボタン
-class MyButton extends Container {
-  MyButton( MyState state, String text, int width, int height, int fontSize, int fontColor, int backgroundColor, Function() onPressed, {Key? key} ) : super(
-    key: key,
-    width: state.size( width ),
-    height: state.size( height ),
-    color: MyColor( backgroundColor ),
-    child: TextButton( key: null, onPressed: onPressed,
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: state.size( fontSize ),
-          color: MyColor( fontColor ),
-          fontWeight: FontWeight.w200,
-        ),
-      ),
-    ),
-  );
-}
-
-// 計算結果等の表示欄
-class MyDisplay extends Container {
-  MyDisplay( MyState state, String text, int width, int height, int fontSize, FontStyle fontStyle, AlignmentGeometry alignment, {Key? key} ) : super(
-    key: key,
-    width: state.size( width ),
-    height: state.size( height ),
-    alignment: alignment,
-    color: MyColor( 0xE0E0E0 ),
-    child: Text(
+// 文字列
+class MyText extends Text {
+  MyText( MyState state, String text, { Key? key, required int fontSize, required int color, TextAlign? textAlign } ) : super(
       text,
+      key: key,
+      textScaleFactor: 1.0,
+      textAlign: (textAlign == null) ? TextAlign.left : textAlign,
       style: TextStyle(
+          height: 1.0,
           fontSize: state.size( fontSize ),
-          color: MyColor( 0x000000 ),
-          fontWeight: FontWeight.w200,
-          fontStyle: fontStyle
-      ),
-    ),
-  );
-}
-
-class MyOptionText extends Text {
-  MyOptionText( MyState state, String text, int fontSize, {Key? key} ) : super(
-    text,
-    key: key,
-    style: TextStyle(
-      fontSize: state.size( fontSize ),
-      fontWeight: FontWeight.w200,
-    ),
+          color: MyColor( color ),
+          fontWeight: FontWeight.w200
+      )
   );
 }

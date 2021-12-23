@@ -50,7 +50,10 @@ class MyState extends State with WidgetsBindingObserver {
   }
 
   // 各ページでオーバーライドする関数群
-  bool autoScroll(){ return false; }
+  bool autoScroll(){
+    // キーボード表示による自動スクロールをさせるかどうか
+    return false;
+  }
   void onInit(){
     // このページの構築時
   }

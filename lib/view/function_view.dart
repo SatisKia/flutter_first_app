@@ -6,6 +6,7 @@ import '../data.dart';
 import '../data/calc_data.dart';
 import '../service.dart';
 import '../state/function_state.dart';
+import '../widget/calc_widget.dart';
 import '../widget/common_widget.dart';
 
 Column functionView( MyFunctionState state ){
@@ -33,36 +34,36 @@ Column functionView( MyFunctionState state ){
       child: MyDisplay( state, "M = ${state.dispMemory}", 320, 20, 17, FontStyle.normal, Alignment.bottomLeft ),
     ),
     MyRow( children: [
-      MyButton( state, "M+", 80, height * 3 ~/ 23, 25, 0x000000, 0xC0C0FF, state.onButtonMAdd ),
-      MyButton( state, "M-", 80, height * 3 ~/ 23, 25, 0x000000, 0xC0C0FF, state.onButtonMSub ),
-      MyButton( state, state.mrcButtonText, 80, height * 3 ~/ 23, 25, state.isMemoryRecalled() ? 0xFF8080 : 0x000000, 0xC0C0FF, state.onButtonMRC ),
-      MyButton( state, "NUM", 80, height * 3 ~/ 23, 25, 0xFFFFFF, 0xFFA0A0, state.onButtonNumber )
+      MyCalcButton( state, "M+", 80, height * 3 ~/ 23, 25, 0x000000, 0xC0C0FF, state.onButtonMAdd ),
+      MyCalcButton( state, "M-", 80, height * 3 ~/ 23, 25, 0x000000, 0xC0C0FF, state.onButtonMSub ),
+      MyCalcButton( state, state.mrcButtonText, 80, height * 3 ~/ 23, 25, state.isMemoryRecalled() ? 0xFF8080 : 0x000000, 0xC0C0FF, state.onButtonMRC ),
+      MyCalcButton( state, "NUM", 80, height * 3 ~/ 23, 25, 0xFFFFFF, 0xFFA0A0, state.onButtonNumber )
     ] ),
     MyRow( children: [
-      MyButton( state, "CE", 80, height * 4 ~/ 23, 32, state.isError() ? 0xFFFFFF : 0xFF8080, state.isError() ? 0xFFA0A0 : 0xFFFFFF, state.onButtonCE ),
-      MyButton( state, "C", 80, height * 4 ~/ 23, 32, state.isError() ? 0xFFFFFF : 0xFF8080, state.isError() ? 0xFFA0A0 : 0xFFFFFF, state.onButtonC ),
-      MyButton( state, state.angleButtonText, 80, height * 4 ~/ 23, 25, 0x000000, 0xFFFFFF, state.onButtonAngle ),
-      MyButton( state, "√", 80, height * 4 ~/ 23, 40, 0x000000, 0xFFFFFF, state.onButtonSqrt )
+      MyCalcButton( state, "CE", 80, height * 4 ~/ 23, 32, state.isError() ? 0xFFFFFF : 0xFF8080, state.isError() ? 0xFFA0A0 : 0xFFFFFF, state.onButtonCE ),
+      MyCalcButton( state, "C", 80, height * 4 ~/ 23, 32, state.isError() ? 0xFFFFFF : 0xFF8080, state.isError() ? 0xFFA0A0 : 0xFFFFFF, state.onButtonC ),
+      MyCalcButton( state, state.angleButtonText, 80, height * 4 ~/ 23, 25, 0x000000, 0xFFFFFF, state.onButtonAngle ),
+      MyCalcButton( state, "√", 80, height * 4 ~/ 23, 40, 0x000000, 0xFFFFFF, state.onButtonSqrt )
     ] ),
     MyRow( children: [
-      MyButton( state, "sin", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonSin ),
-      MyButton( state, "cos", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonCos ),
-      MyButton( state, "tan", 106, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonTan ),
+      MyCalcButton( state, "sin", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonSin ),
+      MyCalcButton( state, "cos", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonCos ),
+      MyCalcButton( state, "tan", 106, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonTan ),
     ] ),
     MyRow( children: [
-      MyButton( state, "asin", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonArcSin ),
-      MyButton( state, "acos", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonArcCos ),
-      MyButton( state, "atan", 106, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonArcTan ),
+      MyCalcButton( state, "asin", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonArcSin ),
+      MyCalcButton( state, "acos", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonArcCos ),
+      MyCalcButton( state, "atan", 106, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonArcTan ),
     ] ),
     MyRow( children: [
-      MyButton( state, "ln", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonLog ),
-      MyButton( state, "log", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonLog10 ),
-      MyButton( state, "sqr", 106, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonSqr ),
+      MyCalcButton( state, "ln", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonLog ),
+      MyCalcButton( state, "log", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonLog10 ),
+      MyCalcButton( state, "sqr", 106, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonSqr ),
     ] ),
     MyRow( children: [
-      MyButton( state, "exp", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonExp ),
-      MyButton( state, "exp10", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonExp10 ),
-      MyButton( state, "int", 106, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonInt ),
+      MyCalcButton( state, "exp", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonExp ),
+      MyCalcButton( state, "exp10", 107, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonExp10 ),
+      MyCalcButton( state, "int", 106, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonInt ),
     ] )
   ] );
 }

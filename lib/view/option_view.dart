@@ -9,7 +9,7 @@ Padding optionView( MyOptionState state ) {
       child: MyColumn(
           children: [
             CheckboxListTile(
-                title: MyOptionText( state, '計算結果をイタリックに', 15 ),
+                title: MyText( state, '計算結果をイタリックに', fontSize: 15, color: 0x000000 ),
                 value: state.italic,
                 controlAffinity: ListTileControlAffinity.leading,
                 onChanged: (bool? value) {
@@ -19,9 +19,9 @@ Padding optionView( MyOptionState state ) {
 
             MyColumnSpace( state, 10 ),
 
-            MyOptionText( state, '桁区切り:', 15 ),
+            MyText( state, '桁区切り:', fontSize: 15, color: 0x000000 ),
             RadioListTile(
-                title: MyOptionText( state, 'なし', 15 ),
+                title: MyText( state, 'なし', fontSize: 15, color: 0x000000 ),
                 value: CalcData.separatorTypeNone,
                 groupValue: state.separator,
                 controlAffinity: ListTileControlAffinity.leading,
@@ -30,7 +30,7 @@ Padding optionView( MyOptionState state ) {
                 }
             ),
             RadioListTile(
-                title: MyOptionText( state, '上部', 15 ),
+                title: MyText( state, '上部', fontSize: 15, color: 0x000000 ),
                 value: CalcData.separatorTypeDash,
                 groupValue: state.separator,
                 controlAffinity: ListTileControlAffinity.leading,
@@ -39,7 +39,7 @@ Padding optionView( MyOptionState state ) {
                 }
             ),
             RadioListTile(
-                title: MyOptionText( state, '下部', 15 ),
+                title: MyText( state, '下部', fontSize: 15, color: 0x000000 ),
                 value: CalcData.separatorTypeComma,
                 groupValue: state.separator,
                 controlAffinity: ListTileControlAffinity.leading,
