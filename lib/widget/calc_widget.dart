@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 
 import '../main.dart';
 import '../utility.dart';
+import 'common_widget.dart';
 
 // ボタン
 class MyCalcButton extends Container {
@@ -12,15 +13,8 @@ class MyCalcButton extends Container {
     width: state.size( width ),
     height: state.size( height ),
     color: MyColor( backgroundColor ),
-    child: TextButton( key: null, onPressed: onPressed,
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: state.size( fontSize ),
-          color: MyColor( fontColor ),
-          fontWeight: FontWeight.w200,
-        ),
-      ),
+    child: TextButton( onPressed: onPressed,
+      child: MyText( state, text, fontSize: fontSize, color: fontColor ),
     ),
   );
 }
@@ -33,14 +27,6 @@ class MyDisplay extends Container {
     height: state.size( height ),
     alignment: alignment,
     color: MyColor( 0xE0E0E0 ),
-    child: Text(
-      text,
-      style: TextStyle(
-          fontSize: state.size( fontSize ),
-          color: MyColor( 0x000000 ),
-          fontWeight: FontWeight.w200,
-          fontStyle: fontStyle
-      ),
-    ),
+    child: MyText( state, text, fontSize: fontSize, fontStyle: fontStyle, color: 0x000000 ),
   );
 }

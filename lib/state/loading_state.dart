@@ -19,7 +19,7 @@ class MyLoadingState extends MyState {
     debugPrint( 'loading onEnter' );
 
     await MyData.calc.load();
-//    await Future.delayed( Duration( seconds: 3 ), (){ return true; } );
+//    await Future.delayed( const Duration( seconds: 3 ), (){ return true; } );
     go( 'calc.number', null );
   }
 

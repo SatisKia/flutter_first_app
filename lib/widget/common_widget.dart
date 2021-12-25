@@ -97,9 +97,9 @@ class MyRowSpace extends SizedBox {
   );
 }
 
-// 文字列
+// テキスト
 class MyText extends Text {
-  MyText( MyState state, String text, { Key? key, required int fontSize, required int color, TextAlign? textAlign } ) : super(
+  MyText( MyState state, String text, { Key? key, required int fontSize, required int color, FontStyle? fontStyle, TextAlign? textAlign } ) : super(
       text,
       key: key,
       textScaleFactor: 1.0,
@@ -107,8 +107,25 @@ class MyText extends Text {
       style: TextStyle(
           height: 1.0,
           fontSize: state.size( fontSize ),
+          fontStyle: (fontStyle == null) ? FontStyle.normal : fontStyle,
           color: MyColor( color ),
           fontWeight: FontWeight.w200
+      )
+  );
+}
+
+// ボタン
+class MyElevatedButton extends SizedBox {
+  MyElevatedButton( MyState state, { Key? key, required int width, required int height, required int color, required Function() onPressed, required Widget child } ) : super(
+      key: key,
+      width: state.size( width ),
+      height: state.size( height ),
+      child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: MyColor( color ),
+          ),
+          onPressed: onPressed,
+          child: child
       )
   );
 }

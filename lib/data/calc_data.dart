@@ -52,7 +52,7 @@ class CalcData {
   bool italicFlag = false;
   int separatorType = separatorTypeNone;
 
-  Future<bool> load() async {
+  Future load() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     answer = prefs.getDouble( "answer" ) ?? 0.0;
     memory = prefs.getDouble( "memory" ) ?? 0.0;
@@ -60,7 +60,6 @@ class CalcData {
     angleType = prefs.getInt( "angleType" ) ?? angleTypeRad;
     italicFlag = prefs.getBool( "italicFlag" ) ?? false;
     separatorType = prefs.getInt( "separatorType" ) ?? separatorTypeNone;
-    return true;
   }
 
   static int saveAnswer         = 0x00000001;

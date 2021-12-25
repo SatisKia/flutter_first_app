@@ -42,6 +42,11 @@ class MyOptionState extends MyState {
     MyData.calc.save( CalcData.saveSeparatorType );
   }
 
+  // 戻る
+  void onButtonBack(){
+    go( returnRoute, null );
+  }
+
   @override
   void onEnter(){
     debugPrint( 'option onEnter' );
@@ -53,7 +58,7 @@ class MyOptionState extends MyState {
   void onBack(){
     debugPrint( 'option onBack' );
 
-    go( returnRoute, null );
+    onButtonBack();
   }
 
   @override
