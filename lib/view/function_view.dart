@@ -9,7 +9,7 @@ import '../state/function_state.dart';
 import '../widget/calc_widget.dart';
 import '../widget/common_widget.dart';
 
-Column functionView( MyFunctionState state ){
+Widget functionView( MyFunctionState state ){
   double height = state.getContentHeight().toDouble() - 20 - 50 - 20; // 計算結果等の表示欄の高さを引いた分
 
   // 桁区切り

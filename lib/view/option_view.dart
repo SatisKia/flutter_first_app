@@ -4,7 +4,7 @@ import '../data/calc_data.dart';
 import '../state/option_state.dart';
 import '../widget/common_widget.dart';
 
-Column optionView( MyOptionState state ) {
+Widget optionView( MyOptionState state ) {
   return MyColumn( children: [
     MyElevatedButton( state,
       width: 320,
