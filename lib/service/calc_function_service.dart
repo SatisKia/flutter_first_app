@@ -122,4 +122,18 @@ class CalcFunctionService extends CalcService {
     } catch(e){
     }
   }
+
+  void setOp(){
+    MyData.calc.answer = getEntry();
+    setDispAnswer( MyData.calc.answer );
+
+    setEntry( MyData.calc.answer );
+    updateEntryStr( true );
+    setDispStr( true );
+
+    MyData.calc.opFlag = true;	// 次に数値入力ボタンが押された場合にprocOpが発動するように
+
+    setMemoryRecalled( false );
+    MyData.calc.save( CalcData.saveAnswer | CalcData.saveMemoryRecalled );
+  }
 }

@@ -36,12 +36,12 @@ Widget numberView( MyNumberState state ){
     MyRow( children: [
       MyCalcButton( state, "M+", 80, height * 3 ~/ 23, 25, 0x000000, 0xC0C0FF, state.onButtonMAdd ),
       MyCalcButton( state, "M-", 80, height * 3 ~/ 23, 25, 0x000000, 0xC0C0FF, state.onButtonMSub ),
-      MyCalcButton( state, state.mrcButtonText, 80, height * 3 ~/ 23, 25, state.isMemoryRecalled() ? 0xFF8080 : 0x000000, 0xC0C0FF, state.onButtonMRC ),
+      MyCalcButton( state, state.mrcButtonText, 80, height * 3 ~/ 23, 25, MyData.calc.memoryRecalled ? 0xFF8080 : 0x000000, 0xC0C0FF, state.onButtonMRC ),
       MyCalcButton( state, "FNC", 80, height * 3 ~/ 23, 25, 0xFFFFFF, 0xFFA0A0, state.onButtonFunction )
     ] ),
     MyRow( children: [
-      MyCalcButton( state, "CE", 80, height * 4 ~/ 23, 32, state.isError() ? 0xFFFFFF : 0xFF8080, state.isError() ? 0xFFA0A0 : 0xFFFFFF, state.onButtonCE ),
-      MyCalcButton( state, "C", 80, height * 4 ~/ 23, 32, state.isError() ? 0xFFFFFF : 0xFF8080, state.isError() ? 0xFFA0A0 : 0xFFFFFF, state.onButtonC ),
+      MyCalcButton( state, "CE", 80, height * 4 ~/ 23, 32, MyData.calc.errorFlag ? 0xFFFFFF : 0xFF8080, MyData.calc.errorFlag ? 0xFFA0A0 : 0xFFFFFF, state.onButtonCE ),
+      MyCalcButton( state, "C", 80, height * 4 ~/ 23, 32, MyData.calc.errorFlag ? 0xFFFFFF : 0xFF8080, MyData.calc.errorFlag ? 0xFFA0A0 : 0xFFFFFF, state.onButtonC ),
       MyCalcButton( state, "DEL", 80, height * 4 ~/ 23, 32, 0x000000, 0xFFFFFF, state.onButtonDEL ),
       MyCalcButton( state, "÷", 80, height * 4 ~/ 23, 40, 0x000000, 0xFFFFFF, state.onButtonDiv )
     ] ),

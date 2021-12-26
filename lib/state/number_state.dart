@@ -54,19 +54,12 @@ class MyNumberState extends MyState {
     );
   }
 
-  bool isMemoryRecalled(){
-    return MyData.calc.memoryRecalled;
-  }
-  bool isError(){
-    return MyData.calc.errorFlag;
-  }
-
   void vibrate(){
     // TODO: 振動機能呼び出し
   }
 
   void onButtonNumber( Function() function ){
-    if( !isError() ){
+    if( !MyData.calc.errorFlag ){
       vibrate();
       setState( function );
     }
@@ -79,11 +72,11 @@ class MyNumberState extends MyState {
   }
   void onButtonMAdd(){ onButtonNumber( (){ MyService.calcNumber.addMemory(); } ); }
   void onButtonMSub(){ onButtonNumber( (){ MyService.calcNumber.subMemory(); } ); }
-  void onButtonMRC(){ onButtonNumber( (){ if( isMemoryRecalled() ){ MyService.calcNumber.clearMemory(); } else { MyService.calcNumber.recallMemory(); } } ); }
+  void onButtonMRC(){ onButtonNumber( (){ if( MyData.calc.memoryRecalled ){ MyService.calcNumber.clearMemory(); } else { MyService.calcNumber.recallMemory(); } } ); }
   void onButtonFunction(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeSet ); go( 'calc.function', null ); } ); }
   void onButtonCE(){ onButtonClear( false ); }
   void onButtonC(){ onButtonClear( true ); }
-  void onButtonDEL(){ if( !isError() && MyData.calc.entryFlag ){ vibrate(); setState( (){ MyService.calcNumber.delEntry(); } ); } }
+  void onButtonDEL(){ if( !MyData.calc.errorFlag && MyData.calc.entryFlag ){ vibrate(); setState( (){ MyService.calcNumber.delEntry(); } ); } }
   void onButtonDiv(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeDiv ); } ); }
   void onButtonMul(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeMul ); } ); }
   void onButtonSub(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeSub ); } ); }

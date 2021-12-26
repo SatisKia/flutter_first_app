@@ -37,13 +37,6 @@ class MyFunctionState extends MyState {
     go( 'calc.number', null );
   }
 
-  bool isMemoryRecalled(){
-    return MyData.calc.memoryRecalled;
-  }
-  bool isError(){
-    return MyData.calc.errorFlag;
-  }
-
   void vibrate(){
     // TODO: 振動機能呼び出し
   }
@@ -59,7 +52,7 @@ class MyFunctionState extends MyState {
   }
 
   void onButtonFunction( Function() function ){
-    if( !isError() ){
+    if( !MyData.calc.errorFlag ){
       vibrate();
       setState( function );
     }
@@ -72,24 +65,24 @@ class MyFunctionState extends MyState {
   }
   void onButtonMAdd(){ onButtonFunction( (){ MyService.calcFunction.addMemory(); } ); }
   void onButtonMSub(){ onButtonFunction( (){ MyService.calcFunction.subMemory(); } ); }
-  void onButtonMRC(){ onButtonFunction( (){ if( isMemoryRecalled() ){ MyService.calcFunction.clearMemory(); } else { MyService.calcFunction.recallMemory(); } } ); }
-  void onButtonNumber(){ onButtonFunction( (){ MyService.calcFunction.setOp( CalcData.opTypeSet ); go( 'calc.number', null ); } ); }
+  void onButtonMRC(){ onButtonFunction( (){ if( MyData.calc.memoryRecalled ){ MyService.calcFunction.clearMemory(); } else { MyService.calcFunction.recallMemory(); } } ); }
+  void onButtonNumber(){ onButtonFunction( (){ MyService.calcFunction.setOp(); go( 'calc.number', null ); } ); }
   void onButtonCE(){ onButtonClear( false ); }
   void onButtonC(){ onButtonClear( true ); }
   void onButtonAngle(){ onButtonFunction( (){ changeAngle(); } ); }
-  void onButtonSqrt(){ onButtonFunction( (){ MyService.calcFunction.funcSqrt(); MyService.calcFunction.setOp( CalcData.opTypeSet ); } ); }
-  void onButtonSin(){ onButtonFunction( (){ MyService.calcFunction.funcSin(); MyService.calcFunction.setOp( CalcData.opTypeSet ); } ); }
-  void onButtonCos(){ onButtonFunction( (){ MyService.calcFunction.funcCos(); MyService.calcFunction.setOp( CalcData.opTypeSet ); } ); }
-  void onButtonTan(){ onButtonFunction( (){ MyService.calcFunction.funcTan(); MyService.calcFunction.setOp( CalcData.opTypeSet ); } ); }
-  void onButtonArcSin(){ onButtonFunction( (){ MyService.calcFunction.funcArcSin(); MyService.calcFunction.setOp( CalcData.opTypeSet ); } ); }
-  void onButtonArcCos(){ onButtonFunction( (){ MyService.calcFunction.funcArcCos(); MyService.calcFunction.setOp( CalcData.opTypeSet ); } ); }
-  void onButtonArcTan(){ onButtonFunction( (){ MyService.calcFunction.funcArcTan(); MyService.calcFunction.setOp( CalcData.opTypeSet ); } ); }
-  void onButtonLog(){ onButtonFunction( (){ MyService.calcFunction.funcLog(); MyService.calcFunction.setOp( CalcData.opTypeSet ); } ); }
-  void onButtonLog10(){ onButtonFunction( (){ MyService.calcFunction.funcLog10(); MyService.calcFunction.setOp( CalcData.opTypeSet ); } ); }
-  void onButtonSqr(){ onButtonFunction( (){ MyService.calcFunction.funcSqr(); MyService.calcFunction.setOp( CalcData.opTypeSet ); } ); }
-  void onButtonExp(){ onButtonFunction( (){ MyService.calcFunction.funcExp(); MyService.calcFunction.setOp( CalcData.opTypeSet ); } ); }
-  void onButtonExp10(){ onButtonFunction( (){ MyService.calcFunction.funcExp10(); MyService.calcFunction.setOp( CalcData.opTypeSet ); } ); }
-  void onButtonInt(){ onButtonFunction( (){ MyService.calcFunction.funcInt(); MyService.calcFunction.setOp( CalcData.opTypeSet ); } ); }
+  void onButtonSqrt(){ onButtonFunction( (){ MyService.calcFunction.funcSqrt(); MyService.calcFunction.setOp(); } ); }
+  void onButtonSin(){ onButtonFunction( (){ MyService.calcFunction.funcSin(); MyService.calcFunction.setOp(); } ); }
+  void onButtonCos(){ onButtonFunction( (){ MyService.calcFunction.funcCos(); MyService.calcFunction.setOp(); } ); }
+  void onButtonTan(){ onButtonFunction( (){ MyService.calcFunction.funcTan(); MyService.calcFunction.setOp(); } ); }
+  void onButtonArcSin(){ onButtonFunction( (){ MyService.calcFunction.funcArcSin(); MyService.calcFunction.setOp(); } ); }
+  void onButtonArcCos(){ onButtonFunction( (){ MyService.calcFunction.funcArcCos(); MyService.calcFunction.setOp(); } ); }
+  void onButtonArcTan(){ onButtonFunction( (){ MyService.calcFunction.funcArcTan(); MyService.calcFunction.setOp(); } ); }
+  void onButtonLog(){ onButtonFunction( (){ MyService.calcFunction.funcLog(); MyService.calcFunction.setOp(); } ); }
+  void onButtonLog10(){ onButtonFunction( (){ MyService.calcFunction.funcLog10(); MyService.calcFunction.setOp(); } ); }
+  void onButtonSqr(){ onButtonFunction( (){ MyService.calcFunction.funcSqr(); MyService.calcFunction.setOp(); } ); }
+  void onButtonExp(){ onButtonFunction( (){ MyService.calcFunction.funcExp(); MyService.calcFunction.setOp(); } ); }
+  void onButtonExp10(){ onButtonFunction( (){ MyService.calcFunction.funcExp10(); MyService.calcFunction.setOp(); } ); }
+  void onButtonInt(){ onButtonFunction( (){ MyService.calcFunction.funcInt(); MyService.calcFunction.setOp(); } ); }
 
   @override
   void onInit(){
