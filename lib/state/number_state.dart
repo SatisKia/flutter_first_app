@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../data.dart';
 import '../data/calc_data.dart';
 import '../main.dart';
 import '../service.dart';
@@ -53,14 +54,11 @@ class MyNumberState extends MyState {
     );
   }
 
-  bool isEntry(){
-    return MyService.calcNumber.isEntry();
-  }
   bool isMemoryRecalled(){
-    return MyService.calcNumber.isMemoryRecalled();
+    return MyData.calc.memoryRecalled;
   }
   bool isError(){
-    return MyService.calcNumber.isError();
+    return MyData.calc.errorFlag;
   }
 
   void vibrate(){
@@ -85,7 +83,7 @@ class MyNumberState extends MyState {
   void onButtonFunction(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeSet ); go( 'calc.function', null ); } ); }
   void onButtonCE(){ onButtonClear( false ); }
   void onButtonC(){ onButtonClear( true ); }
-  void onButtonDEL(){ if( !isError() && isEntry() ){ vibrate(); setState( (){ MyService.calcNumber.delEntry(); } ); } }
+  void onButtonDEL(){ if( !isError() && MyData.calc.entryFlag ){ vibrate(); setState( (){ MyService.calcNumber.delEntry(); } ); } }
   void onButtonDiv(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeDiv ); } ); }
   void onButtonMul(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeMul ); } ); }
   void onButtonSub(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeSub ); } ); }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../data.dart';
 import '../data/calc_data.dart';
 import '../main.dart';
 import '../service.dart';
@@ -18,7 +19,6 @@ class MyFunctionState extends MyState {
 
   String dispStr = "0";
   String dispAngle = "RAD";
-  String dispAnswer = "0";
   String dispMemory = "0";
   String mrcButtonText = "MR";
   String angleButtonText = "DEG";
@@ -38,10 +38,10 @@ class MyFunctionState extends MyState {
   }
 
   bool isMemoryRecalled(){
-    return MyService.calcFunction.isMemoryRecalled();
+    return MyData.calc.memoryRecalled;
   }
   bool isError(){
-    return MyService.calcFunction.isError();
+    return MyData.calc.errorFlag;
   }
 
   void vibrate(){

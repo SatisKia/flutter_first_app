@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-import '../data/calc_data.dart';
 import '../data.dart';
+import '../data/calc_data.dart';
 import '../main.dart';
 import '../view/option_view.dart';
 

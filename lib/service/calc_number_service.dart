@@ -1,4 +1,5 @@
 import 'calc_service.dart';
+import '../data.dart';
 import '../data/calc_data.dart';
 import '../state/number_state.dart';
 
@@ -6,8 +7,10 @@ class CalcNumberService extends CalcService {
   MyNumberState? state;
   void initWithState( MyNumberState state ){
     this.state = state;
+
     super.init();
   }
+
   @override
   void setDispError( int type ){
     if( type == CalcData.errorTypeDivideByZero ){
@@ -54,5 +57,50 @@ class CalcNumberService extends CalcService {
   @override
   void memoryRecalled( bool flag ){
     state!.mrcButtonText = flag ? "MC" : "MR";
+  }
+
+  // 入力値の操作
+  void delEntry(){
+    updateEntryStr( false );
+    if( MyData.calc.entryStr.length == 1 ){
+      MyData.calc.entryStr = "0";
+    } else {
+      MyData.calc.entryStr = MyData.calc.entryStr.substring( 0, MyData.calc.entryStr.length - 1 );
+    }
+    setDispStr( false );
+
+    setMemoryRecalled( false );
+    MyData.calc.save( CalcData.saveMemoryRecalled );
+  }
+  void addNumber( chr ){
+    procOp();
+    updateEntryStr( false );
+    if( MyData.calc.entryStr.contains( "." ) ){
+      MyData.calc.entryStr += chr;
+    } else if( double.parse( MyData.calc.entryStr ) == 0.0 ){
+      MyData.calc.entryStr = chr;
+    } else {
+      MyData.calc.entryStr += chr;
+    }
+    setDispStr( false );
+
+    setMemoryRecalled( false );
+    MyData.calc.save( CalcData.saveMemoryRecalled );
+  }
+  void addPoint(){
+    procOp();
+    updateEntryStr( false );
+    if( !MyData.calc.entryStr.contains( "." ) ){
+      MyData.calc.entryStr += ".";
+    }
+    setDispStr( false );
+
+    setMemoryRecalled( false );
+    MyData.calc.save( CalcData.saveMemoryRecalled );
+  }
+
+  // 符号反転
+  void negative(){
+    clearAndSetEntry( 0.0 - getEntry() );
   }
 }
