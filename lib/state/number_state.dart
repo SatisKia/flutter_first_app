@@ -73,7 +73,7 @@ class MyNumberState extends MyState {
   void onButtonMAdd(){ onButtonNumber( (){ MyService.calcNumber.addMemory(); } ); }
   void onButtonMSub(){ onButtonNumber( (){ MyService.calcNumber.subMemory(); } ); }
   void onButtonMRC(){ onButtonNumber( (){ if( MyData.calc.memoryRecalled ){ MyService.calcNumber.clearMemory(); } else { MyService.calcNumber.recallMemory(); } } ); }
-  void onButtonFunction(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeSet ); go( 'calc.function', null ); } ); }
+  void onButtonFunction(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeSet ); goNoDuration( 'calc.function', null ); } ); }
   void onButtonCE(){ onButtonClear( false ); }
   void onButtonC(){ onButtonClear( true ); }
   void onButtonDEL(){ if( !MyData.calc.errorFlag && MyData.calc.entryFlag ){ vibrate(); setState( (){ MyService.calcNumber.delEntry(); } ); } }

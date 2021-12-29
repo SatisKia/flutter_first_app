@@ -14,6 +14,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build( BuildContext context ){
     return MaterialApp(
+        theme: ThemeData(
+          pageTransitionsTheme: const PageTransitionsTheme(
+            builders: <TargetPlatform, PageTransitionsBuilder>{
+              TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            },
+          ),
+        ),
         initialRoute: MyConfig.initialRoute, // 初期ページ
         routes: MyConfig.routes // ページ一覧
     );
@@ -82,7 +90,16 @@ class MyState extends State with WidgetsBindingObserver {
   // 指定したページへ遷移する
   void go( String routeName, Object? arguments ){
     onLeave();
+//    Navigator.pushNamedAndRemoveUntil(context, routeName, (_) => false, arguments: arguments);
     Navigator.pushReplacementNamed(context, routeName, arguments: arguments);
+  }
+  void goNoDuration( String routeName, Object? arguments ){
+    onLeave();
+    Navigator.pushAndRemoveUntil(context, PageRouteBuilder(
+      settings: RouteSettings(name: routeName, arguments: arguments),
+      pageBuilder: (_,__,___) => MyConfig.routes[routeName]!(context),
+      transitionDuration: const Duration(seconds: 0),
+    ), (_) => false);
   }
 
   // ダイアログを閉じる
