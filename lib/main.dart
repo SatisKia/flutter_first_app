@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyState extends State with WidgetsBindingObserver {
-  Function viewFunc;
+  Function viewFunc; // ページの画面描画関数
   MyState( this.viewFunc );
 
   String? routeName; // ページ識別子
@@ -175,7 +175,7 @@ class MyState extends State with WidgetsBindingObserver {
         child: SizedBox(
             width: contentWidth,
             height: contentHeight,
-            child: viewFunc( this )
+            child: viewFunc( this ), // ページの画面描画関数呼び出し
         )
     );
 
