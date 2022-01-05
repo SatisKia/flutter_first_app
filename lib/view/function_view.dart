@@ -22,15 +22,15 @@ Widget functionView( MyFunctionState state ){
 
   return MyColumn( children: [
     InkWell(
-      onTap: () { state.go('calc.option', state.routeName); },
+      onTap: () { state.go('/option', state.routeName); },
       child: MyDisplay( state, state.dispAngle, 320, 20, 17, FontStyle.normal, Alignment.topLeft ),
     ),
     InkWell(
-      onTap: () { state.go('calc.option', state.routeName); },
+      onTap: () { state.go('/option', state.routeName); },
       child: MyDisplay( state, dispStr, 320, 50, 29, MyData.calc.italicFlag ? FontStyle.italic : FontStyle.normal, Alignment.centerRight ),
     ),
     InkWell(
-      onTap: () { state.go('calc.option', state.routeName); },
+      onTap: () { state.go('/option', state.routeName); },
       child: MyDisplay( state, "M = ${state.dispMemory}", 320, 20, 17, FontStyle.normal, Alignment.bottomLeft ),
     ),
     MyRow( children: [

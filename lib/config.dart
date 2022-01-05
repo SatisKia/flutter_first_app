@@ -9,14 +9,11 @@ class MyConfig {
   // アプリの仮想幅
   static int contentWidth = 320;
 
-  // 初期ページ
-  static String initialRoute = 'calc.loading';
-
   // ページ一覧
   static Map<String, StatefulWidget Function(BuildContext context)> routes = {
-    'calc.loading': (BuildContext context) => const MyLoadingWidget(),
-    'calc.number': (BuildContext context) => const MyNumberWidget(),
-    'calc.function': (BuildContext context) => const MyFunctionWidget(),
-    'calc.option': (BuildContext context) => const MyOptionWidget(),
+    '/': (BuildContext context) => const MyLoadingWidget(),
+    '/number': (BuildContext context) => const MyNumberWidget(),
+    '/function': (BuildContext context) => const MyFunctionWidget(),
+    '/option': (BuildContext context) => const MyOptionWidget(),
   };
 }

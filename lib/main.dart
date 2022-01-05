@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
             },
           ),
         ),
-        initialRoute: MyConfig.initialRoute, // 初期ページ
         routes: MyConfig.routes // ページ一覧
     );
   }

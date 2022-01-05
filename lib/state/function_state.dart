@@ -34,7 +34,7 @@ class MyFunctionState extends MyState {
   void onBack(){
     debugPrint( 'function onBack' );
 
-    goNoDuration( 'calc.number', null );
+    goNoDuration( '/number', null );
   }
 
   void vibrate(){
@@ -66,7 +66,7 @@ class MyFunctionState extends MyState {
   void onButtonMAdd(){ onButtonFunction( (){ MyService.calcFunction.addMemory(); } ); }
   void onButtonMSub(){ onButtonFunction( (){ MyService.calcFunction.subMemory(); } ); }
   void onButtonMRC(){ onButtonFunction( (){ if( MyData.calc.memoryRecalled ){ MyService.calcFunction.clearMemory(); } else { MyService.calcFunction.recallMemory(); } } ); }
-  void onButtonNumber(){ onButtonFunction( (){ MyService.calcFunction.setOp(); goNoDuration( 'calc.number', null ); } ); }
+  void onButtonNumber(){ onButtonFunction( (){ MyService.calcFunction.setOp(); goNoDuration( '/number', null ); } ); }
   void onButtonCE(){ onButtonClear( false ); }
   void onButtonC(){ onButtonClear( true ); }
   void onButtonAngle(){ onButtonFunction( (){ changeAngle(); } ); }
