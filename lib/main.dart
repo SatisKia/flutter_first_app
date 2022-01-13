@@ -107,7 +107,7 @@ class MyState extends State with WidgetsBindingObserver {
   }
 
   // アプリを終了させる
-  void exit(){
+  void finish(){
     SystemNavigator.pop();
   }
 
@@ -164,7 +164,7 @@ class MyState extends State with WidgetsBindingObserver {
   @override
   Widget build( BuildContext context ){
     contentWidth  = MediaQuery.of( context ).size.width;
-    contentHeight = MediaQuery.of( context ).size.height - MediaQuery.of( context ).padding.top;
+    contentHeight = MediaQuery.of( context ).size.height - MediaQuery.of( context ).padding.top - MediaQuery.of( context ).padding.bottom;
 
     AppBar appBar = AppBar(
         toolbarHeight: 0

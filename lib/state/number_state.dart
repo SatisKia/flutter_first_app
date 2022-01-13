@@ -47,7 +47,7 @@ class MyNumberState extends MyState {
             ),
             CupertinoDialogAction(
               child: const Text('はい'),
-              onPressed: (){ exit(); },
+              onPressed: (){ finish(); },
             )
           ],
         )
