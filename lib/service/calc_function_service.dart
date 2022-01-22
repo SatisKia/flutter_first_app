@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'calc_service.dart';
 import '../data.dart';
 import '../data/calc_data.dart';
 import '../state/function_state.dart';
+import 'calc_service.dart';
 
 class CalcFunctionService extends CalcService {
   MyFunctionState? state;

@@ -1,7 +1,7 @@
-import 'calc_service.dart';
 import '../data.dart';
 import '../data/calc_data.dart';
 import '../state/number_state.dart';
+import 'calc_service.dart';
 
 class CalcNumberService extends CalcService {
   MyNumberState? state;
