@@ -13,7 +13,7 @@ class MyOptionWidget extends StatefulWidget {
 }
 
 class MyOptionState extends MyState {
-  MyOptionState() : super(optionView);
+  MyOptionState() : super( OptionView() );
 
   @override
   bool autoScroll(){ return true; }
@@ -44,7 +44,7 @@ class MyOptionState extends MyState {
 
   // 戻る
   void onButtonBack(){
-    go( returnRoute, null );
+    go( returnRoute );
   }
 
   @override

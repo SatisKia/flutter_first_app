@@ -12,7 +12,7 @@ class MyLoadingWidget extends StatefulWidget {
 }
 
 class MyLoadingState extends MyState {
-  MyLoadingState() : super(loadingView);
+  MyLoadingState() : super( LoadingView() );
 
   @override
   void onEnter() async {
@@ -20,7 +20,7 @@ class MyLoadingState extends MyState {
 
     await MyData.calc.load();
 //    await Future.delayed( const Duration( seconds: 3 ), (){ return true; } );
-    go( '/number', null );
+    go( '/number' );
   }
 
   @override

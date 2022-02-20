@@ -15,7 +15,7 @@ class MyFunctionWidget extends StatefulWidget {
 }
 
 class MyFunctionState extends MyState {
-  MyFunctionState() : super( functionView );
+  MyFunctionState() : super( FunctionView() );
 
   String dispStr = "0";
   String dispAngle = "RAD";
@@ -34,7 +34,7 @@ class MyFunctionState extends MyState {
   void onBack(){
     debugPrint( 'function onBack' );
 
-    goNoDuration( '/number', null );
+    goNoDuration( '/number' );
   }
 
   void vibrate(){
@@ -66,7 +66,7 @@ class MyFunctionState extends MyState {
   void onButtonMAdd(){ onButtonFunction( (){ MyService.calcFunction.addMemory(); } ); }
   void onButtonMSub(){ onButtonFunction( (){ MyService.calcFunction.subMemory(); } ); }
   void onButtonMRC(){ onButtonFunction( (){ if( MyData.calc.memoryRecalled ){ MyService.calcFunction.clearMemory(); } else { MyService.calcFunction.recallMemory(); } } ); }
-  void onButtonNumber(){ onButtonFunction( (){ MyService.calcFunction.setOp(); goNoDuration( '/number', null ); } ); }
+  void onButtonNumber(){ onButtonFunction( (){ MyService.calcFunction.setOp(); goNoDuration( '/number' ); } ); }
   void onButtonCE(){ onButtonClear( false ); }
   void onButtonC(){ onButtonClear( true ); }
   void onButtonAngle(){ onButtonFunction( (){ changeAngle(); } ); }

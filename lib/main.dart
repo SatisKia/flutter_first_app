@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -28,8 +27,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyState extends State with WidgetsBindingObserver {
-  Function viewFunc; // ページの画面描画関数
-  MyState( this.viewFunc );
+  MyView view; // ページの画面用
+  MyState( this.view );
 
   String? routeName; // ページ識別子
   Object? arguments; // goパラメータ
@@ -87,12 +86,12 @@ class MyState extends State with WidgetsBindingObserver {
   }
 
   // 指定したページへ遷移する
-  void go( String routeName, Object? arguments ){
+  void go( String routeName, { Object? arguments } ){
     onLeave();
 //    Navigator.pushNamedAndRemoveUntil(context, routeName, (_) => false, arguments: arguments);
     Navigator.pushReplacementNamed(context, routeName, arguments: arguments);
   }
-  void goNoDuration( String routeName, Object? arguments ){
+  void goNoDuration( String routeName, { Object? arguments } ){
     onLeave();
     Navigator.pushAndRemoveUntil(context, PageRouteBuilder(
       settings: RouteSettings(name: routeName, arguments: arguments),
@@ -174,7 +173,7 @@ class MyState extends State with WidgetsBindingObserver {
         child: SizedBox(
             width: contentWidth,
             height: contentHeight,
-            child: viewFunc( this ), // ページの画面描画関数呼び出し
+            child: view.build( this ), // ページの画面を構築する
         )
     );
 
@@ -199,5 +198,11 @@ class MyState extends State with WidgetsBindingObserver {
         body: body,
       );
     }
+  }
+}
+
+class MyView {
+  Widget build( MyState state ){
+    return Container(); // 仮のウィジェット
   }
 }
