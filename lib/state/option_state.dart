@@ -5,6 +5,10 @@ import '../data/calc_data.dart';
 import '../main.dart';
 import '../view/option_view.dart';
 
+class MyOptionArguments {
+  String? returnRoute;
+}
+
 class MyOptionWidget extends StatefulWidget {
   const MyOptionWidget({Key? key}) : super(key: key);
 
@@ -51,7 +55,8 @@ class MyOptionState extends MyState {
   void onEnter(){
     debugPrint( 'option onEnter' );
 
-    returnRoute = arguments as String;
+    MyOptionArguments arguments = this.arguments as MyOptionArguments;
+    returnRoute = arguments.returnRoute!;
   }
 
   @override

@@ -5,6 +5,7 @@ import '../data/calc_data.dart';
 import '../main.dart';
 import '../service.dart';
 import '../state/number_state.dart';
+import '../state/option_state.dart';
 import '../widget/calc_widget.dart';
 import '../widget/common_widget.dart';
 
@@ -25,15 +26,27 @@ class NumberView extends MyView {
 
     return MyColumn( children: [
       InkWell(
-        onTap: () { state.go('/option', arguments: state.routeName); },
+        onTap: () {
+          MyOptionArguments arguments = MyOptionArguments();
+          arguments.returnRoute = state.routeName;
+          state.go('/option', arguments: arguments);
+        },
         child: MyDisplay( state, state.dispLog, 320, 20, 17, FontStyle.normal, Alignment.topLeft ),
       ),
       InkWell(
-        onTap: () { state.go('/option', arguments: state.routeName); },
+        onTap: () {
+          MyOptionArguments arguments = MyOptionArguments();
+          arguments.returnRoute = state.routeName;
+          state.go('/option', arguments: arguments);
+        },
         child: MyDisplay( state, dispStr, 320, 50, 29, MyData.calc.italicFlag ? FontStyle.italic : FontStyle.normal, Alignment.centerRight ),
       ),
       InkWell(
-        onTap: () { state.go('/option', arguments: state.routeName); },
+        onTap: () {
+          MyOptionArguments arguments = MyOptionArguments();
+          arguments.returnRoute = state.routeName;
+          state.go('/option', arguments: arguments);
+        },
         child: MyDisplay( state, "A = ${state.dispAnswer}  M = ${state.dispMemory}", 320, 20, 17, FontStyle.normal, Alignment.bottomLeft ),
       ),
       MyRow( children: [

@@ -1,0 +1,9 @@
+{
+  "@@locale": "ja",
+  "back": "戻る",
+  "italic": "計算結果をイタリックに",
+  "separator": "桁区切り:",
+  "separatorNone": "なし",
+  "separatorUpper": "上部",
+  "separatorLower": "下部"
+}

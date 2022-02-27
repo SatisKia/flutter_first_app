@@ -18,6 +18,11 @@ dependencies:
 
   shared_preferences: ^2.0.10
 
+  # ローカライゼーション
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+
 dev_dependencies:
 
   flutter_test:
@@ -28,3 +33,6 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  # ローカライゼーション
+  generate: true

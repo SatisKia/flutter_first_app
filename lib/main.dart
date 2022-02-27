@@ -1,18 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// ローカライゼーション
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'config.dart';
 
 void main(){
-  runApp( const MyApp() );
+  runApp( MyApp() );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp( { Key? key } ) : super( key: key );
+  MyApp( { Key? key } ) : super( key: key );
+
+  // ローカライゼーション
+  final List<LocalizationsDelegate> localizationsDelegates = [
+    AppLocalizations.delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ];
+  final List<Locale> supportedLocales = [
+    Locale('en', ''), // 英語
+    Locale('ja', ''), // 日本語
+  ];
 
   @override
   Widget build( BuildContext context ){
     return MaterialApp(
+        localizationsDelegates: localizationsDelegates, // ローカライゼーション
+        supportedLocales: supportedLocales, // ローカライゼーション
         theme: ThemeData(
           pageTransitionsTheme: const PageTransitionsTheme(
             builders: <TargetPlatform, PageTransitionsBuilder>{
@@ -171,9 +189,9 @@ class MyState extends State with WidgetsBindingObserver {
     WillPopScope body = WillPopScope(
         onWillPop: _willPopCallback,
         child: SizedBox(
-            width: contentWidth,
-            height: contentHeight,
-            child: view.build( this ), // ページの画面を構築する
+          width: contentWidth,
+          height: contentHeight,
+          child: view.build( this ), // ページの画面を構築する
         )
     );
 

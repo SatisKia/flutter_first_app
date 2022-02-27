@@ -1,0 +1,33 @@
+{
+  "@@locale": "en",
+
+  "back": "Return",
+  "@back": {
+    "description": ""
+  },
+
+  "italic": "Display calculation results in italics",
+  "@italic": {
+    "description": ""
+  },
+
+  "separator": "Separator:",
+  "@separator": {
+    "description": ""
+  },
+
+  "separatorNone": "None",
+  "@separatorNone": {
+    "description": ""
+  },
+
+  "separatorUpper": "Upper",
+  "@separatorUpper": {
+    "description": ""
+  },
+
+  "separatorLower": "Lower",
+  "@separatorLower": {
+    "description": ""
+  }
+}
