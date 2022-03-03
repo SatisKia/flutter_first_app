@@ -18,13 +18,20 @@ class MyColumn extends Column {
   MyColumn( {
     Key? key,
     MainAxisAlignment vAlign = vAlignTop,
-    CrossAxisAlignment hAlign = hAlignLeft,
-    required List<Widget> children,
+    MainAxisSize mainAxisSize = MainAxisSize.max,
+    CrossAxisAlignment hAlign = hAlignLeft, // ColumnのデフォルトはhAlignCenter
+    TextDirection? textDirection,
+    VerticalDirection verticalDirection = VerticalDirection.down,
+    TextBaseline? textBaseline,
+    List<Widget> children = const <Widget>[],
   } ) : super(
     key: key,
     mainAxisAlignment: vAlign,
-    mainAxisSize: MainAxisSize.max,
+    mainAxisSize: mainAxisSize,
     crossAxisAlignment: hAlign,
+    textDirection: textDirection,
+    verticalDirection: verticalDirection,
+    textBaseline: textBaseline,
     children: children,
   );
 }
@@ -44,38 +51,90 @@ class MyRow extends Row {
   MyRow( {
     Key? key,
     MainAxisAlignment hAlign = hAlignLeft,
-    CrossAxisAlignment vAlign = vAlignTop,
-    required List<Widget> children,
+    MainAxisSize mainAxisSize = MainAxisSize.max,
+    CrossAxisAlignment vAlign = vAlignTop, // RowのデフォルトはvAlignCenter
+    TextDirection? textDirection,
+    VerticalDirection verticalDirection = VerticalDirection.down,
+    TextBaseline? textBaseline,
+    List<Widget> children = const <Widget>[],
   } ) : super(
     key: key,
     mainAxisAlignment: hAlign,
-    mainAxisSize: MainAxisSize.max,
+    mainAxisSize: mainAxisSize,
     crossAxisAlignment: vAlign,
+    textDirection: textDirection,
+    verticalDirection: verticalDirection,
+    textBaseline: textBaseline,
     children: children,
   );
 }
 
 class MyContainer extends Container {
-  MyContainer( MyState state, { Key? key, required int width, required int height, int color = 0xFFFFFF, required Widget child } ) : super(
+  MyContainer( MyState state, {
+    Key? key,
+    AlignmentGeometry alignment = Alignment.topLeft,
+    EdgeInsetsGeometry? padding,
+    int color = 0xFFFFFF,
+    Decoration? decoration,
+    Decoration? foregroundDecoration,
+    required int width,
+    required int height,
+    BoxConstraints? constraints,
+    EdgeInsetsGeometry? margin,
+    Matrix4? transform,
+    AlignmentGeometry? transformAlignment,
+    Widget? child,
+    Clip clipBehavior = Clip.none,
+  } ) : super(
+    key: key,
+    alignment: alignment,
+    padding: padding,
+    color: MyColor( color ),
+    decoration: decoration,
+    foregroundDecoration: foregroundDecoration,
+    width: state.size( width ),
+    height: state.size( height ),
+    constraints: constraints,
+    margin: margin,
+    transform: transform,
+    transformAlignment: transformAlignment,
+    child: child,
+    clipBehavior: clipBehavior,
+  );
+}
+
+class MySizedBox extends SizedBox {
+  MySizedBox( MyState state, {
+    Key? key,
+    required int width,
+    required int height,
+    Widget? child,
+  } ) : super(
     key: key,
     width: state.size( width ),
     height: state.size( height ),
-    color: MyColor( color ),
     child: child,
   );
 }
 
 // 周囲の余白
 class MyPadding extends Padding {
-  MyPadding( MyState state, { Key? key, int left = 0, int top = 0, int right = 0, int bottom = 0, required Widget child } ) : super(
-    key: key,
-    padding: EdgeInsets.only(
-      left: state.size( left ),
-      top: state.size( top ),
-      right: state.size( right ),
-      bottom: state.size( bottom ),
-    ),
-    child: child,
+  MyPadding( MyState state, {
+    Key? key,
+    int left = 0,
+    int top = 0,
+    int right = 0,
+    int bottom = 0,
+    Widget? child
+  } ) : super(
+      key: key,
+      padding: EdgeInsets.only(
+        left: state.size( left ),
+        top: state.size( top ),
+        right: state.size( right ),
+        bottom: state.size( bottom ),
+      ),
+      child: child
   );
 }
 
@@ -97,33 +156,79 @@ class MyRowSpace extends SizedBox {
 
 // テキスト
 class MyText extends Text {
-  MyText( MyState state, String text, { Key? key, required int fontSize, required int color, FontStyle? fontStyle, TextAlign? textAlign } ) : super(
-      text,
-      key: key,
-      textScaleFactor: 1.0,
-      textAlign: (textAlign == null) ? TextAlign.left : textAlign,
-      style: TextStyle(
-          height: 1.0,
-          fontSize: state.size( fontSize ),
-          fontStyle: (fontStyle == null) ? FontStyle.normal : fontStyle,
-          color: MyColor( color ),
-          fontWeight: FontWeight.w200
-      )
+  MyText( MyState state, String text, {
+    Key? key,
+    required int color,
+    required int fontSize,
+    FontStyle? fontStyle,
+    TextDecoration? decoration,
+    StrutStyle? strutStyle,
+    TextAlign? textAlign,
+    TextDirection? textDirection,
+    Locale? locale,
+    bool? softWrap,
+    TextOverflow? overflow,
+    int? maxLines,
+    String? semanticsLabel,
+    TextWidthBasis? textWidthBasis,
+    TextHeightBehavior? textHeightBehavior,
+  } ) : super(
+    text,
+    key: key,
+    style: TextStyle(
+      color: MyColor( color ),
+      fontSize: state.size( fontSize ),
+      fontWeight: FontWeight.w200,
+      fontStyle: (fontStyle == null) ? FontStyle.normal : fontStyle,
+      height: 1.0,
+      decoration: decoration,
+    ),
+    strutStyle: strutStyle,
+    textAlign: (textAlign == null) ? TextAlign.left : textAlign,
+    textDirection: textDirection,
+    locale: locale,
+    softWrap: softWrap,
+    overflow: overflow,
+    textScaleFactor: 1.0,
+    maxLines: maxLines,
+    semanticsLabel: semanticsLabel,
+    textWidthBasis: textWidthBasis,
+    textHeightBehavior: textHeightBehavior,
   );
 }
 
 // ボタン
 class MyElevatedButton extends SizedBox {
-  MyElevatedButton( MyState state, { Key? key, required int width, required int height, required int color, required Function() onPressed, required Widget child } ) : super(
+  MyElevatedButton( MyState state, {
+    Key? key,
+    required int width,
+    required int height,
+    required int color,
+    void Function()? onPressed,
+    void Function()? onLongPress,
+    void Function(bool)? onHover,
+    void Function(bool)? onFocusChange,
+    FocusNode? focusNode,
+    bool autofocus = false,
+    Clip clipBehavior = Clip.none,
+    required Widget child,
+  } ) : super(
       key: key,
       width: state.size( width ),
       height: state.size( height ),
       child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            primary: MyColor( color ),
-          ),
-          onPressed: onPressed,
-          child: child
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        onHover: onHover,
+        onFocusChange: onFocusChange,
+        style: ElevatedButton.styleFrom(
+          primary: MyColor( color ),
+          padding: EdgeInsets.zero,
+        ),
+        focusNode: focusNode,
+        autofocus: autofocus,
+        clipBehavior: clipBehavior,
+        child: child,
       )
   );
 }

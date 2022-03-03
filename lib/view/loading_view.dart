@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../main.dart';
 import '../state/loading_state.dart';
+import '../widget/common_widget.dart';
 
 class LoadingView extends MyView {
   @override
@@ -9,9 +10,10 @@ class LoadingView extends MyView {
     state as MyLoadingState;
 
     return Center(
-        child: SizedBox(
-            width: state.size( 32 ),
-            height: state.size( 32 ),
+        child: MySizedBox(
+            state,
+            width: 32,
+            height: 32,
             child: const CircularProgressIndicator()
         )
     );
