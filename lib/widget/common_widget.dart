@@ -154,7 +154,6 @@ class MyRowSpace extends SizedBox {
   );
 }
 
-// テキスト
 class MyText extends Text {
   MyText( MyState state, String text, {
     Key? key,
@@ -197,7 +196,40 @@ class MyText extends Text {
   );
 }
 
-// ボタン
+class MyTextButton extends Container {
+  MyTextButton( MyState state, {
+    Key? key,
+    required int width,
+    required int height,
+    int color = 0xFFFFFF,
+    void Function()? onPressed,
+    void Function()? onLongPress,
+    void Function(bool)? onHover,
+    void Function(bool)? onFocusChange,
+    ButtonStyle? style,
+    FocusNode? focusNode,
+    bool autofocus = false,
+    Clip clipBehavior = Clip.none,
+    required Widget child,
+  } ) : super(
+      key: key,
+      width: state.size( width ),
+      height: state.size( height ),
+      color: MyColor( color ),
+      child: TextButton(
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        onHover: onHover,
+        onFocusChange: onFocusChange,
+        style: style,
+        focusNode: focusNode,
+        autofocus: autofocus,
+        clipBehavior: clipBehavior,
+        child: child,
+      )
+  );
+}
+
 class MyElevatedButton extends SizedBox {
   MyElevatedButton( MyState state, {
     Key? key,
