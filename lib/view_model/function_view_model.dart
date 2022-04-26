@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../data.dart';
-import '../data/calc_data.dart';
 import '../main.dart';
+import '../model.dart';
+import '../model/calc_model.dart';
 import '../service.dart';
 import '../view/function_view.dart';
 
@@ -42,17 +42,17 @@ class MyFunctionState extends MyState {
   }
 
   void changeAngle(){
-    if( MyService.calcFunction.angle() == CalcData.angleTypeRad ){
-      MyService.calcFunction.setAngle( CalcData.angleTypeDeg );
-    } else if( MyService.calcFunction.angle() == CalcData.angleTypeDeg ){
-      MyService.calcFunction.setAngle( CalcData.angleTypeGrad );
-    } else if( MyService.calcFunction.angle() == CalcData.angleTypeGrad ){
-      MyService.calcFunction.setAngle( CalcData.angleTypeRad );
+    if( MyService.calcFunction.angle() == CalcModel.angleTypeRad ){
+      MyService.calcFunction.setAngle( CalcModel.angleTypeDeg );
+    } else if( MyService.calcFunction.angle() == CalcModel.angleTypeDeg ){
+      MyService.calcFunction.setAngle( CalcModel.angleTypeGrad );
+    } else if( MyService.calcFunction.angle() == CalcModel.angleTypeGrad ){
+      MyService.calcFunction.setAngle( CalcModel.angleTypeRad );
     }
   }
 
   void onButtonFunction( Function() function ){
-    if( !MyData.calc.errorFlag ){
+    if( !MyModel.calc.errorFlag ){
       vibrate();
       setState( function );
     }
@@ -65,7 +65,7 @@ class MyFunctionState extends MyState {
   }
   void onButtonMAdd(){ onButtonFunction( (){ MyService.calcFunction.addMemory(); } ); }
   void onButtonMSub(){ onButtonFunction( (){ MyService.calcFunction.subMemory(); } ); }
-  void onButtonMRC(){ onButtonFunction( (){ if( MyData.calc.memoryRecalled ){ MyService.calcFunction.clearMemory(); } else { MyService.calcFunction.recallMemory(); } } ); }
+  void onButtonMRC(){ onButtonFunction( (){ if( MyModel.calc.memoryRecalled ){ MyService.calcFunction.clearMemory(); } else { MyService.calcFunction.recallMemory(); } } ); }
   void onButtonNumber(){ onButtonFunction( (){ MyService.calcFunction.setOp(); goNoDuration( '/number' ); } ); }
   void onButtonCE(){ onButtonClear( false ); }
   void onButtonC(){ onButtonClear( true ); }

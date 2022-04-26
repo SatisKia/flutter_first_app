@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-import '../data.dart';
-import '../data/calc_data.dart';
 import '../main.dart';
+import '../model.dart';
+import '../model/calc_model.dart';
 import '../view/option_view.dart';
 
 class MyOptionArguments {
@@ -25,25 +25,25 @@ class MyOptionState extends MyState {
   String returnRoute = '';
 
   // イタリック
-  bool italic = MyData.calc.italicFlag;
+  bool italic = MyModel.calc.italicFlag;
   void setItalic(bool flag){
     setState(() {
       italic = flag;
     });
 
-    MyData.calc.italicFlag = italic;
-    MyData.calc.save( CalcData.saveItalicFlag );
+    MyModel.calc.italicFlag = italic;
+    MyModel.calc.save( CalcModel.saveItalicFlag );
   }
 
   // 桁区切り
-  int separator = MyData.calc.separatorType;
+  int separator = MyModel.calc.separatorType;
   void setSeparator(int value){
     setState(() {
       separator = value;
     });
 
-    MyData.calc.separatorType = separator;
-    MyData.calc.save( CalcData.saveSeparatorType );
+    MyModel.calc.separatorType = separator;
+    MyModel.calc.save( CalcModel.saveSeparatorType );
   }
 
   // 戻る

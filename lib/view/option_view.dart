@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 // ローカライゼーション
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../data/calc_data.dart';
 import '../main.dart';
-import '../state/option_state.dart';
+import '../model/calc_model.dart';
+import '../view_model/option_view_model.dart';
 import '../widget/common_widget.dart';
 
 class OptionView extends MyView {
@@ -46,7 +46,7 @@ class OptionView extends MyView {
             MyText( state, stringSeparator, fontSize: 15, color: 0x000000 ),
             RadioListTile(
                 title: MyText( state, stringSeparatorNone, fontSize: 15, color: 0x000000 ),
-                value: CalcData.separatorTypeNone,
+                value: CalcModel.separatorTypeNone,
                 groupValue: state.separator,
                 controlAffinity: ListTileControlAffinity.leading,
                 onChanged: (int? value) {
@@ -55,7 +55,7 @@ class OptionView extends MyView {
             ),
             RadioListTile(
                 title: MyText( state, stringSeparatorUpper, fontSize: 15, color: 0x000000 ),
-                value: CalcData.separatorTypeDash,
+                value: CalcModel.separatorTypeDash,
                 groupValue: state.separator,
                 controlAffinity: ListTileControlAffinity.leading,
                 onChanged: (int? value) {
@@ -64,7 +64,7 @@ class OptionView extends MyView {
             ),
             RadioListTile(
                 title: MyText( state, stringSeparatorLower, fontSize: 15, color: 0x000000 ),
-                value: CalcData.separatorTypeComma,
+                value: CalcModel.separatorTypeComma,
                 groupValue: state.separator,
                 controlAffinity: ListTileControlAffinity.leading,
                 onChanged: (int? value) {

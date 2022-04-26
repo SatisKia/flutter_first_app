@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
-import 'state/function_state.dart';
-import 'state/loading_state.dart';
-import 'state/number_state.dart';
-import 'state/option_state.dart';
+import 'view_model/function_view_model.dart';
+import 'view_model/loading_view_model.dart';
+import 'view_model/number_view_model.dart';
+import 'view_model/option_view_model.dart';
 
 class MyConfig {
   // アプリの仮想幅

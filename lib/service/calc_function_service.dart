@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import '../data.dart';
-import '../data/calc_data.dart';
-import '../state/function_state.dart';
+import '../model.dart';
+import '../model/calc_model.dart';
+import '../view_model/function_view_model.dart';
 import 'calc_service.dart';
 
 class CalcFunctionService extends CalcService {
@@ -11,18 +11,18 @@ class CalcFunctionService extends CalcService {
     this.state = state;
 
     super.init();
-    _angleChanged( MyData.calc.angleType );
+    _angleChanged( MyModel.calc.angleType );
   }
 
   @override
   void setDispError( int type ){
-    if( type == CalcData.errorTypeDivideByZero ){
+    if( type == CalcModel.errorTypeDivideByZero ){
       state!.dispStr = "Divide by zero";
-    } else if( type == CalcData.errorTypePositiveInfinity ){
+    } else if( type == CalcModel.errorTypePositiveInfinity ){
       state!.dispStr = "Infinity";
-    } else if( type == CalcData.errorTypeNegativeInfinity ){
+    } else if( type == CalcModel.errorTypeNegativeInfinity ){
       state!.dispStr = "-Infinity";
-    } else if( type == CalcData.errorTypeNotANumber ){
+    } else if( type == CalcModel.errorTypeNotANumber ){
       state!.dispStr = "NaN";
     }
   }
@@ -44,13 +44,13 @@ class CalcFunctionService extends CalcService {
   }
 
   void _angleChanged( int type ){
-    if( type == CalcData.angleTypeRad ){
+    if( type == CalcModel.angleTypeRad ){
       state!.dispAngle = "RAD";
       state!.angleButtonText = "DEG";
-    } else if( type == CalcData.angleTypeDeg ){
+    } else if( type == CalcModel.angleTypeDeg ){
       state!.dispAngle = "DEG";
       state!.angleButtonText = "GRAD";
-    } else if( type == CalcData.angleTypeGrad ){
+    } else if( type == CalcModel.angleTypeGrad ){
       state!.dispAngle = "GRAD";
       state!.angleButtonText = "RAD";
     }
@@ -61,19 +61,19 @@ class CalcFunctionService extends CalcService {
 
   // 角度の種類
   void setAngle( int type ){
-    MyData.calc.angleType = type;
-    MyData.calc.save( CalcData.saveAngleType );
+    MyModel.calc.angleType = type;
+    MyModel.calc.save( CalcModel.saveAngleType );
 
-    _angleChanged( MyData.calc.angleType );
+    _angleChanged( MyModel.calc.angleType );
   }
   double _angleToRad( double value ){
-    return (MyData.calc.angleType == CalcData.angleTypeRad) ? value : value * _pi / ((MyData.calc.angleType == CalcData.angleTypeDeg) ? 180.0 : 200.0);
+    return (MyModel.calc.angleType == CalcModel.angleTypeRad) ? value : value * _pi / ((MyModel.calc.angleType == CalcModel.angleTypeDeg) ? 180.0 : 200.0);
   }
   double _radToAngle( double value ){
-    return (MyData.calc.angleType == CalcData.angleTypeRad) ? value : value * ((MyData.calc.angleType == CalcData.angleTypeDeg) ? 180.0 : 200.0) / _pi;
+    return (MyModel.calc.angleType == CalcModel.angleTypeRad) ? value : value * ((MyModel.calc.angleType == CalcModel.angleTypeDeg) ? 180.0 : 200.0) / _pi;
   }
   int angle(){
-    return MyData.calc.angleType;
+    return MyModel.calc.angleType;
   }
 
   // 数学関数
@@ -124,16 +124,16 @@ class CalcFunctionService extends CalcService {
   }
 
   void setOp(){
-    MyData.calc.answer = getEntry();
-    setDispAnswer( MyData.calc.answer );
+    MyModel.calc.answer = getEntry();
+    setDispAnswer( MyModel.calc.answer );
 
-    setEntry( MyData.calc.answer );
+    setEntry( MyModel.calc.answer );
     updateEntryStr( true );
     setDispStr( true );
 
-    MyData.calc.opFlag = true;	// 次に数値入力ボタンが押された場合にprocOpが発動するように
+    MyModel.calc.opFlag = true;	// 次に数値入力ボタンが押された場合にprocOpが発動するように
 
     setMemoryRecalled( false );
-    MyData.calc.save( CalcData.saveAnswer | CalcData.saveMemoryRecalled );
+    MyModel.calc.save( CalcModel.saveAnswer | CalcModel.saveMemoryRecalled );
   }
 }

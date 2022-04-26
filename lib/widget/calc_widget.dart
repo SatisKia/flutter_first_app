@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../main.dart';
-import '../utility.dart';
 import 'common_widget.dart';
 
 // ボタン

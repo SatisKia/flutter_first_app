@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../main.dart';
-import '../state/loading_state.dart';
+import '../view_model/loading_view_model.dart';
 import '../widget/common_widget.dart';
 
 class LoadingView extends MyView {

@@ -1,6 +1,6 @@
-import '../data.dart';
-import '../data/calc_data.dart';
-import '../state/number_state.dart';
+import '../model.dart';
+import '../model/calc_model.dart';
+import '../view_model/number_view_model.dart';
 import 'calc_service.dart';
 
 class CalcNumberService extends CalcService {
@@ -13,13 +13,13 @@ class CalcNumberService extends CalcService {
 
   @override
   void setDispError( int type ){
-    if( type == CalcData.errorTypeDivideByZero ){
+    if( type == CalcModel.errorTypeDivideByZero ){
       state!.dispStr = "Divide by zero";
-    } else if( type == CalcData.errorTypePositiveInfinity ){
+    } else if( type == CalcModel.errorTypePositiveInfinity ){
       state!.dispStr = "Infinity";
-    } else if( type == CalcData.errorTypeNegativeInfinity ){
+    } else if( type == CalcModel.errorTypeNegativeInfinity ){
       state!.dispStr = "-Infinity";
-    } else if( type == CalcData.errorTypeNotANumber ){
+    } else if( type == CalcModel.errorTypeNotANumber ){
       state!.dispStr = "NaN";
     }
   }
@@ -37,10 +37,10 @@ class CalcNumberService extends CalcService {
   }
   @override
   void setDispLog( value, opType ){
-    if( opType == CalcData.opTypeDiv ){ state!.dispLog = valueToString( value, 10 ) + " ÷"; }
-    if( opType == CalcData.opTypeMul ){ state!.dispLog = valueToString( value, 10 ) + " ×"; }
-    if( opType == CalcData.opTypeSub ){ state!.dispLog = valueToString( value, 10 ) + " -"; }
-    if( opType == CalcData.opTypeAdd ){ state!.dispLog = valueToString( value, 10 ) + " +"; }
+    if( opType == CalcModel.opTypeDiv ){ state!.dispLog = valueToString( value, 10 ) + " ÷"; }
+    if( opType == CalcModel.opTypeMul ){ state!.dispLog = valueToString( value, 10 ) + " ×"; }
+    if( opType == CalcModel.opTypeSub ){ state!.dispLog = valueToString( value, 10 ) + " -"; }
+    if( opType == CalcModel.opTypeAdd ){ state!.dispLog = valueToString( value, 10 ) + " +"; }
   }
   @override
   void addDispLog( value ){
@@ -62,41 +62,41 @@ class CalcNumberService extends CalcService {
   // 入力値の操作
   void delEntry(){
     updateEntryStr( false );
-    if( MyData.calc.entryStr.length == 1 ){
-      MyData.calc.entryStr = "0";
+    if( MyModel.calc.entryStr.length == 1 ){
+      MyModel.calc.entryStr = "0";
     } else {
-      MyData.calc.entryStr = MyData.calc.entryStr.substring( 0, MyData.calc.entryStr.length - 1 );
+      MyModel.calc.entryStr = MyModel.calc.entryStr.substring( 0, MyModel.calc.entryStr.length - 1 );
     }
     setDispStr( false );
 
     setMemoryRecalled( false );
-    MyData.calc.save( CalcData.saveMemoryRecalled );
+    MyModel.calc.save( CalcModel.saveMemoryRecalled );
   }
   void addNumber( chr ){
     procOp();
     updateEntryStr( false );
-    if( MyData.calc.entryStr.contains( "." ) ){
-      MyData.calc.entryStr += chr;
-    } else if( double.parse( MyData.calc.entryStr ) == 0.0 ){
-      MyData.calc.entryStr = chr;
+    if( MyModel.calc.entryStr.contains( "." ) ){
+      MyModel.calc.entryStr += chr;
+    } else if( double.parse( MyModel.calc.entryStr ) == 0.0 ){
+      MyModel.calc.entryStr = chr;
     } else {
-      MyData.calc.entryStr += chr;
+      MyModel.calc.entryStr += chr;
     }
     setDispStr( false );
 
     setMemoryRecalled( false );
-    MyData.calc.save( CalcData.saveMemoryRecalled );
+    MyModel.calc.save( CalcModel.saveMemoryRecalled );
   }
   void addPoint(){
     procOp();
     updateEntryStr( false );
-    if( !MyData.calc.entryStr.contains( "." ) ){
-      MyData.calc.entryStr += ".";
+    if( !MyModel.calc.entryStr.contains( "." ) ){
+      MyModel.calc.entryStr += ".";
     }
     setDispStr( false );
 
     setMemoryRecalled( false );
-    MyData.calc.save( CalcData.saveMemoryRecalled );
+    MyModel.calc.save( CalcModel.saveMemoryRecalled );
   }
 
   // 符号反転
@@ -106,69 +106,69 @@ class CalcNumberService extends CalcService {
 
   // 演算の予約
   void setOp( type ){
-    MyData.calc.opFlag = true;
-    MyData.calc.nextOpType = type;
+    MyModel.calc.opFlag = true;
+    MyModel.calc.nextOpType = type;
     procOp();	// 前回の演算を実行
 
-    if( type == CalcData.opTypeSet ){
-      setEntry( MyData.calc.answer );	// 計算結果をセット
+    if( type == CalcModel.opTypeSet ){
+      setEntry( MyModel.calc.answer );	// 計算結果をセット
       updateEntryStr( true );
-      MyData.calc.opFlag = true;	// 次に数値入力ボタンが押された場合にprocOpが発動するように
+      MyModel.calc.opFlag = true;	// 次に数値入力ボタンが押された場合にprocOpが発動するように
     }
     setDispStr( true );
 
     setMemoryRecalled( false );
-    MyData.calc.save( CalcData.saveMemoryRecalled );
+    MyModel.calc.save( CalcModel.saveMemoryRecalled );
   }
 
   // 演算の実行
   void procOp(){
-    if( MyData.calc.opFlag ){
-      if( MyData.calc.opType == CalcData.opTypeSet ){
-        MyData.calc.answer = getEntry();
-        MyData.calc.save( CalcData.saveAnswer );
-      } else if( MyData.calc.opType == CalcData.opTypeDiv ){
+    if( MyModel.calc.opFlag ){
+      if( MyModel.calc.opType == CalcModel.opTypeSet ){
+        MyModel.calc.answer = getEntry();
+        MyModel.calc.save( CalcModel.saveAnswer );
+      } else if( MyModel.calc.opType == CalcModel.opTypeDiv ){
         double value = getEntry();
         if( value == 0.0 ){
-          MyData.calc.errorFlag = true;
-          MyData.calc.errorType = CalcData.errorTypeDivideByZero;
-          errorChanged( MyData.calc.errorFlag );
+          MyModel.calc.errorFlag = true;
+          MyModel.calc.errorType = CalcModel.errorTypeDivideByZero;
+          errorChanged( MyModel.calc.errorFlag );
         } else {
-          MyData.calc.answer /= value;
-          MyData.calc.save( CalcData.saveAnswer );
+          MyModel.calc.answer /= value;
+          MyModel.calc.save( CalcModel.saveAnswer );
         }
-      } else if( MyData.calc.opType == CalcData.opTypeMul ){
-        MyData.calc.answer *= getEntry();
-        MyData.calc.save( CalcData.saveAnswer );
-      } else if( MyData.calc.opType == CalcData.opTypeSub ){
-        MyData.calc.answer -= getEntry();
-        MyData.calc.save( CalcData.saveAnswer );
-      } else if( MyData.calc.opType == CalcData.opTypeAdd ){
-        MyData.calc.answer += getEntry();
-        MyData.calc.save( CalcData.saveAnswer );
+      } else if( MyModel.calc.opType == CalcModel.opTypeMul ){
+        MyModel.calc.answer *= getEntry();
+        MyModel.calc.save( CalcModel.saveAnswer );
+      } else if( MyModel.calc.opType == CalcModel.opTypeSub ){
+        MyModel.calc.answer -= getEntry();
+        MyModel.calc.save( CalcModel.saveAnswer );
+      } else if( MyModel.calc.opType == CalcModel.opTypeAdd ){
+        MyModel.calc.answer += getEntry();
+        MyModel.calc.save( CalcModel.saveAnswer );
       }
-      if( MyData.calc.errorFlag ){
+      if( MyModel.calc.errorFlag ){
         return;
       }
-      setDispAnswer( MyData.calc.answer );
+      setDispAnswer( MyModel.calc.answer );
 
-      if( MyData.calc.opType != CalcData.opTypeSet && MyData.calc.nextOpType == CalcData.opTypeSet ){
+      if( MyModel.calc.opType != CalcModel.opTypeSet && MyModel.calc.nextOpType == CalcModel.opTypeSet ){
         updateEntryStr( true );
         addDispLog( getEntry() );
       } else {
-        if( MyData.calc.nextOpType == CalcData.opTypeSet ){
+        if( MyModel.calc.nextOpType == CalcModel.opTypeSet ){
           clearDispLog();
         } else {
-          setDispLog( MyData.calc.answer, MyData.calc.nextOpType );
+          setDispLog( MyModel.calc.answer, MyModel.calc.nextOpType );
         }
       }
 
       // 計算が終わったらクリア
       setEntry( 0.0 );
-      MyData.calc.entryStr = "0";
+      MyModel.calc.entryStr = "0";
 
-      MyData.calc.opFlag = false;
-      MyData.calc.opType = MyData.calc.nextOpType;
+      MyModel.calc.opFlag = false;
+      MyModel.calc.opType = MyModel.calc.nextOpType;
     }
   }
 }

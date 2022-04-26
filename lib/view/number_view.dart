@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../data.dart';
-import '../data/calc_data.dart';
 import '../main.dart';
+import '../model.dart';
+import '../model/calc_model.dart';
 import '../service.dart';
-import '../state/number_state.dart';
-import '../state/option_state.dart';
+import '../view_model/number_view_model.dart';
+import '../view_model/option_view_model.dart';
 import '../widget/calc_widget.dart';
 import '../widget/common_widget.dart';
 
@@ -22,9 +22,9 @@ class NumberView extends MyView {
 
     // 桁区切り
     String dispStr = state.dispStr;
-    if (MyData.calc.separatorType == CalcData.separatorTypeDash) {
+    if (MyModel.calc.separatorType == CalcModel.separatorTypeDash) {
       dispStr = MyService.calc.sepString(dispStr, "'");
-    } else if (MyData.calc.separatorType == CalcData.separatorTypeComma) {
+    } else if (MyModel.calc.separatorType == CalcModel.separatorTypeComma) {
       dispStr = MyService.calc.sepString(dispStr, ",");
     }
 
@@ -43,7 +43,7 @@ class NumberView extends MyView {
           arguments.returnRoute = state.routeName;
           state.go('/option', arguments: arguments);
         },
-        child: MyDisplay( state, dispStr, 320, 50, 29, MyData.calc.italicFlag ? FontStyle.italic : FontStyle.normal, Alignment.centerRight ),
+        child: MyDisplay( state, dispStr, 320, 50, 29, MyModel.calc.italicFlag ? FontStyle.italic : FontStyle.normal, Alignment.centerRight ),
       ),
       InkWell(
         onTap: () {
@@ -56,12 +56,12 @@ class NumberView extends MyView {
       MyRow( children: [
         MyCalcButton( state, "M+", 80, buttonHeight1, 25, 0x000000, 0xC0C0FF, state.onButtonMAdd ),
         MyCalcButton( state, "M-", 80, buttonHeight1, 25, 0x000000, 0xC0C0FF, state.onButtonMSub ),
-        MyCalcButton( state, state.mrcButtonText, 80, buttonHeight1, 25, MyData.calc.memoryRecalled ? 0xFF8080 : 0x000000, 0xC0C0FF, state.onButtonMRC ),
+        MyCalcButton( state, state.mrcButtonText, 80, buttonHeight1, 25, MyModel.calc.memoryRecalled ? 0xFF8080 : 0x000000, 0xC0C0FF, state.onButtonMRC ),
         MyCalcButton( state, "FNC", 80, buttonHeight1, 25, 0xFFFFFF, 0xFFA0A0, state.onButtonFunction )
       ] ),
       MyRow( children: [
-        MyCalcButton( state, "CE", 80, buttonHeight2, 32, MyData.calc.errorFlag ? 0xFFFFFF : 0xFF8080, MyData.calc.errorFlag ? 0xFFA0A0 : 0xFFFFFF, state.onButtonCE ),
-        MyCalcButton( state, "C", 80, buttonHeight2, 32, MyData.calc.errorFlag ? 0xFFFFFF : 0xFF8080, MyData.calc.errorFlag ? 0xFFA0A0 : 0xFFFFFF, state.onButtonC ),
+        MyCalcButton( state, "CE", 80, buttonHeight2, 32, MyModel.calc.errorFlag ? 0xFFFFFF : 0xFF8080, MyModel.calc.errorFlag ? 0xFFA0A0 : 0xFFFFFF, state.onButtonCE ),
+        MyCalcButton( state, "C", 80, buttonHeight2, 32, MyModel.calc.errorFlag ? 0xFFFFFF : 0xFF8080, MyModel.calc.errorFlag ? 0xFFA0A0 : 0xFFFFFF, state.onButtonC ),
         MyCalcButton( state, "DEL", 80, buttonHeight2, 32, 0x000000, 0xFFFFFF, state.onButtonDEL ),
         MyCalcButton( state, "÷", 80, buttonHeight2, 40, 0x000000, 0xFFFFFF, state.onButtonDiv )
       ] ),

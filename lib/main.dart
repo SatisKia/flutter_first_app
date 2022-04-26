@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
     GlobalCupertinoLocalizations.delegate,
   ];
   final List<Locale> supportedLocales = [
-    Locale('en', ''), // 英語
-    Locale('ja', ''), // 日本語
+    const Locale('en', ''), // 英語
+    const Locale('ja', ''), // 日本語
   ];
 
   @override

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../data.dart';
-import '../data/calc_data.dart';
 import '../main.dart';
+import '../model.dart';
+import '../model/calc_model.dart';
 import '../service.dart';
 import '../view/number_view.dart';
 
@@ -59,7 +59,7 @@ class MyNumberState extends MyState {
   }
 
   void onButtonNumber( Function() function ){
-    if( !MyData.calc.errorFlag ){
+    if( !MyModel.calc.errorFlag ){
       vibrate();
       setState( function );
     }
@@ -72,15 +72,15 @@ class MyNumberState extends MyState {
   }
   void onButtonMAdd(){ onButtonNumber( (){ MyService.calcNumber.addMemory(); } ); }
   void onButtonMSub(){ onButtonNumber( (){ MyService.calcNumber.subMemory(); } ); }
-  void onButtonMRC(){ onButtonNumber( (){ if( MyData.calc.memoryRecalled ){ MyService.calcNumber.clearMemory(); } else { MyService.calcNumber.recallMemory(); } } ); }
-  void onButtonFunction(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeSet ); goNoDuration( '/function' ); } ); }
+  void onButtonMRC(){ onButtonNumber( (){ if( MyModel.calc.memoryRecalled ){ MyService.calcNumber.clearMemory(); } else { MyService.calcNumber.recallMemory(); } } ); }
+  void onButtonFunction(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcModel.opTypeSet ); goNoDuration( '/function' ); } ); }
   void onButtonCE(){ onButtonClear( false ); }
   void onButtonC(){ onButtonClear( true ); }
-  void onButtonDEL(){ if( !MyData.calc.errorFlag && MyData.calc.entryFlag ){ vibrate(); setState( (){ MyService.calcNumber.delEntry(); } ); } }
-  void onButtonDiv(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeDiv ); } ); }
-  void onButtonMul(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeMul ); } ); }
-  void onButtonSub(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeSub ); } ); }
-  void onButtonAdd(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeAdd ); } ); }
+  void onButtonDEL(){ if( !MyModel.calc.errorFlag && MyModel.calc.entryFlag ){ vibrate(); setState( (){ MyService.calcNumber.delEntry(); } ); } }
+  void onButtonDiv(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcModel.opTypeDiv ); } ); }
+  void onButtonMul(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcModel.opTypeMul ); } ); }
+  void onButtonSub(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcModel.opTypeSub ); } ); }
+  void onButtonAdd(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcModel.opTypeAdd ); } ); }
   void onButton0(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "0" ); } ); }
   void onButton1(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "1" ); } ); }
   void onButton2(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "2" ); } ); }
@@ -93,7 +93,7 @@ class MyNumberState extends MyState {
   void onButton9(){ onButtonNumber( (){ MyService.calcNumber.addNumber( "9" ); } ); }
   void onButtonPoint(){ onButtonNumber( (){ MyService.calcNumber.addPoint(); } ); }
   void onButtonNegative(){ onButtonNumber( (){ MyService.calcNumber.negative(); } ); }
-  void onButtonEqual(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcData.opTypeSet ); } ); }
+  void onButtonEqual(){ onButtonNumber( (){ MyService.calcNumber.setOp( CalcModel.opTypeSet ); } ); }
 
   @override
   void onInit(){

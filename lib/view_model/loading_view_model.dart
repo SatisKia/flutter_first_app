@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-import '../data.dart';
 import '../main.dart';
+import '../model.dart';
 import '../view/loading_view.dart';
 
 class MyLoadingWidget extends StatefulWidget {
@@ -18,7 +18,7 @@ class MyLoadingState extends MyState {
   void onEnter() async {
     debugPrint( 'loading onEnter' );
 
-    await MyData.calc.load();
+    await MyModel.calc.load();
 //    await Future.delayed( const Duration( seconds: 3 ), (){ return true; } );
     go( '/number' );
   }

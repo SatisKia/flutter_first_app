@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CalcData {
+class CalcModel {
   // 演算子の種類
   static int opTypeSet = 0;
   static int opTypeDiv = 1;
