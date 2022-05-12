@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
 import '../model.dart';
@@ -18,8 +21,20 @@ class MyLoadingState extends MyState {
   void onEnter() async {
     debugPrint( 'loading onEnter' );
 
+    // バックグラウンド画像
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    MyModel.app.imageFlag = prefs.getBool( 'imageFlag' ) ?? false;
+    MyModel.app.imageData = prefs.getString( 'imageData') ?? '';
+    MyModel.app.imageX = prefs.getDouble( 'imageX_${MyModel.app.imageData.hashCode}') ?? 0.0;
+    MyModel.app.imageY = prefs.getDouble( 'imageY_${MyModel.app.imageData.hashCode}') ?? 0.0;
+    if( MyModel.app.imageData.isNotEmpty ) {
+      MyModel.app.image = MemoryImage( base64.decode( MyModel.app.imageData ) );
+    }
+
     await MyModel.calc.load();
+
 //    await Future.delayed( const Duration( seconds: 3 ), (){ return true; } );
+
     go( '/number' );
   }
 

@@ -28,7 +28,7 @@ class NumberView extends MyView {
       dispStr = MyService.calc.sepString(dispStr, ",");
     }
 
-    return MyColumn( children: [
+    Widget child = MyColumn( children: [
       InkWell(
         onTap: () {
           MyOptionArguments arguments = MyOptionArguments();
@@ -90,5 +90,22 @@ class NumberView extends MyView {
         MyCalcButton( state, "=", 80, buttonHeight3, 40, 0xFF8080, 0xFFFFFF, state.onButtonEqual )
       ] )
     ] );
+
+
+    if( MyModel.app.imageFlag && MyModel.app.image != null ) {
+      return Container(
+          width: state.contentWidth,
+          height: state.contentHeight,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: MyModel.app.image!,
+                  fit: BoxFit.cover,
+                  alignment: Alignment( MyModel.app.imageX, MyModel.app.imageY )
+              )
+          ),
+          child: child
+      );
+    }
+    return child;
   }
 }

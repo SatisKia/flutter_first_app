@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first_app/model.dart';
 
 // ローカライゼーション
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,8 +21,12 @@ class OptionView extends MyView {
     String stringSeparatorNone  = AppLocalizations.of(state.context)!.separatorNone;
     String stringSeparatorUpper = AppLocalizations.of(state.context)!.separatorUpper;
     String stringSeparatorLower = AppLocalizations.of(state.context)!.separatorLower;
+    String stringLoadImage      = AppLocalizations.of(state.context)!.loadImage;
+    String stringRemoveImage    = AppLocalizations.of(state.context)!.removeImage;
+    String stringImageX         = AppLocalizations.of(state.context)!.imageX;
+    String stringImageY         = AppLocalizations.of(state.context)!.imageY;
 
-    return MyColumn( children: [
+    Widget child = MyColumn( children: [
       MyElevatedButton( state,
         width: 320,
         height: 40,
@@ -71,8 +76,67 @@ class OptionView extends MyView {
                   state.setSeparator(value!);
                 }
             ),
+
+            MyColumnSpace( state, 10 ),
+
+            Row(
+                children: [
+                  OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.blue
+                      ),
+                      onPressed: state.loadImage,
+                      child: MyText( state, stringLoadImage, fontSize: 15, color: 0xFFFFFF )
+                  ),
+                  MyRowSpace( state, 10 ),
+                  OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.blue
+                      ),
+                      onPressed: state.removeImage,
+                      child: MyText( state, stringRemoveImage, fontSize: 15, color: 0xFFFFFF )
+                  ),
+                ]
+            ),
+
+            MyColumnSpace( state, 10 ),
+
+            MyText( state, stringImageX, fontSize: 15, color: 0x000000 ),
+            Slider(
+              value: MyModel.app.imageX,
+              min: -1.0,
+              max: 1.0,
+              divisions: 100,
+              onChanged: state.onChangedImageX,
+              onChangeEnd: state.onChangeEndImageX,
+            ),
+            MyText( state, stringImageY, fontSize: 15, color: 0x000000 ),
+            Slider(
+              value: MyModel.app.imageY,
+              min: -1.0,
+              max: 1.0,
+              divisions: 100,
+              onChanged: state.onChangedImageY,
+              onChangeEnd: state.onChangeEndImageY,
+            )
           ] )
-      ) ]
-    );
+      )
+    ] );
+
+    if( MyModel.app.imageFlag && MyModel.app.image != null ) {
+      return Container(
+          width: state.contentWidth,
+          height: state.contentHeight,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: MyModel.app.image!,
+                  fit: BoxFit.cover,
+                  alignment: Alignment( MyModel.app.imageX, MyModel.app.imageY )
+              )
+          ),
+          child: child
+      );
+    }
+    return child;
   }
 }

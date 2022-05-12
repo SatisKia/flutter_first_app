@@ -5,5 +5,9 @@
   "separator": "桁区切り:",
   "separatorNone": "なし",
   "separatorUpper": "上部",
-  "separatorLower": "下部"
+  "separatorLower": "下部",
+  "loadImage": "画像を読み込む",
+  "removeImage": "画像を設定解除",
+  "imageX": "水平方向の配置:",
+  "imageY": "垂直方向の配置:"
 }

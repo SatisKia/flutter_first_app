@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../main.dart';
+import '../model.dart';
 import 'common_widget.dart';
 
 // ボタン
@@ -11,6 +12,7 @@ class MyCalcButton extends MyTextButton {
     width: width,
     height: height,
     color: backgroundColor,
+    alpha: MyModel.app.imageFlag ? 0x7F : 0xFF,
     onPressed: onPressed,
     child: MyText( state, text, fontSize: fontSize, color: fontColor ),
   );
@@ -25,6 +27,7 @@ class MyDisplay extends MyContainer {
     height: height,
     alignment: alignment,
     color: 0xE0E0E0,
+    alpha: MyModel.app.imageFlag ? 0x7F : 0xFF,
     child: MyText( state, text, fontSize: fontSize, fontStyle: fontStyle, color: 0x000000 ),
   );
 }

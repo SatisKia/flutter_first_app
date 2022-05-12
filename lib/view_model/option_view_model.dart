@@ -1,4 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
 import '../model.dart';
@@ -44,6 +50,72 @@ class MyOptionState extends MyState {
 
     MyModel.calc.separatorType = separator;
     MyModel.calc.save( CalcModel.saveSeparatorType );
+  }
+
+  // 画像を読み込む
+  void loadImage() async {
+    ImagePicker imagePicker = ImagePicker();
+    XFile? imageFile = await imagePicker.pickImage(source: ImageSource.gallery);
+    if( imageFile != null ){
+      File file = File.fromUri(Uri.file(imageFile.path));
+      Uint8List data = file.readAsBytesSync();
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      setState(() {
+        MyModel.app.imageData = base64.encode(data);
+        MyModel.app.imageX = prefs.getDouble( 'imageX_${MyModel.app.imageData.hashCode}') ?? 0.0;
+        MyModel.app.imageY = prefs.getDouble( 'imageY_${MyModel.app.imageData.hashCode}') ?? 0.0;
+        MyModel.app.image = MemoryImage( data );
+        MyModel.app.imageFlag = true;
+      });
+
+      await prefs.setBool( 'imageFlag', MyModel.app.imageFlag );
+      await prefs.setString( 'imageData', MyModel.app.imageData );
+    }
+  }
+
+  // 画像を設定解除
+  void removeImage() async {
+    setState(() {
+      MyModel.app.imageFlag = false;
+      MyModel.app.imageData = '';
+      MyModel.app.image = null;
+    });
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool( 'imageFlag', MyModel.app.imageFlag );
+    await prefs.setString( 'imageData', MyModel.app.imageData );
+  }
+
+  // 水平方向の配置
+  void onChangedImageX( double value ){
+    setState(() {
+      MyModel.app.imageX = value;
+    });
+  }
+  void onChangeEndImageX( double value ) async {
+    setState(() {
+      MyModel.app.imageX = value;
+    });
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble( 'imageX_${MyModel.app.imageData.hashCode}', MyModel.app.imageX );
+  }
+
+  // 垂直方向の配置
+  void onChangedImageY( double value ){
+    setState(() {
+      MyModel.app.imageY = value;
+    });
+  }
+  void onChangeEndImageY( double value ) async {
+    setState(() {
+      MyModel.app.imageY = value;
+    });
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble( 'imageY_${MyModel.app.imageData.hashCode}', MyModel.app.imageY );
   }
 
   // 戻る

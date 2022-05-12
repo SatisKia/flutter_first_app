@@ -28,7 +28,7 @@ class FunctionView extends MyView {
       dispStr = MyService.calc.sepString(dispStr, ",");
     }
 
-    return MyColumn( children: [
+    Widget child = MyColumn( children: [
       InkWell(
         onTap: () {
           MyOptionArguments arguments = MyOptionArguments();
@@ -86,5 +86,22 @@ class FunctionView extends MyView {
         MyCalcButton( state, "int", 106, buttonHeight3, 32, 0x000000, 0xFFFFFF, state.onButtonInt ),
       ] )
     ] );
+
+
+    if( MyModel.app.imageFlag && MyModel.app.image != null ) {
+      return Container(
+          width: state.contentWidth,
+          height: state.contentHeight,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: MyModel.app.image!,
+                  fit: BoxFit.cover,
+                  alignment: Alignment( MyModel.app.imageX, MyModel.app.imageY )
+              )
+          ),
+          child: child
+      );
+    }
+    return child;
   }
 }

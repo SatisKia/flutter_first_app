@@ -29,5 +29,25 @@
   "separatorLower": "Lower",
   "@separatorLower": {
     "description": ""
+  },
+
+  "loadImage": "Load image",
+  "@loadImage": {
+    "description": ""
+  },
+
+  "removeImage": "Remove image",
+  "@removeImage": {
+    "description": ""
+  },
+
+  "imageX": "Horizontal alignment:",
+  "@imageX": {
+    "description": ""
+  },
+
+  "imageY": "Vertical alignment:",
+  "@imageY": {
+    "description": ""
   }
 }
