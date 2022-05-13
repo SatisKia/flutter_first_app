@@ -59,6 +59,10 @@ class MyOptionState extends MyState {
     if( imageFile != null ){
       File file = File.fromUri(Uri.file(imageFile.path));
       Uint8List data = file.readAsBytesSync();
+      try {
+        await file.delete();
+      } catch(_) {
+      }
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
