@@ -132,11 +132,11 @@ class MyState extends State with WidgetsBindingObserver {
   void initState() {
     super.initState();
     onInit();
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     if( autoScroll() ) {
       scrollController = ScrollController();
     }
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       if( autoScroll() ) {
         scrollController!.jumpTo(scrollController!.position.maxScrollExtent);
       }
@@ -146,7 +146,7 @@ class MyState extends State with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     if( autoScroll() ){
       scrollController!.dispose();
     }
