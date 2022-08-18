@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../main.dart';
 import '../model/calc_model.dart';
 import '../view_model/option_view_model.dart';
+import '../widget/calc_widget.dart';
 import '../widget/common_widget.dart';
 
 class OptionView extends MyView {
@@ -38,7 +39,7 @@ class OptionView extends MyView {
       MyPadding( state, left: 10, top: 10, right: 10, bottom: 10,
           child: MyColumn( children: [
             CheckboxListTile(
-                title: MyText( state, stringItalic, fontSize: 15, color: 0x000000 ),
+                title: MyTextShadow( state, stringItalic, fontSize: 15, color: 0x000000 ),
                 value: state.italic,
                 controlAffinity: ListTileControlAffinity.leading,
                 onChanged: (bool? value) {
@@ -48,9 +49,9 @@ class OptionView extends MyView {
 
             MyColumnSpace( state, 10 ),
 
-            MyText( state, stringSeparator, fontSize: 15, color: 0x000000 ),
+            MyTextShadow( state, stringSeparator, fontSize: 15, color: 0x000000 ),
             RadioListTile(
-                title: MyText( state, stringSeparatorNone, fontSize: 15, color: 0x000000 ),
+                title: MyTextShadow( state, stringSeparatorNone, fontSize: 15, color: 0x000000 ),
                 value: CalcModel.separatorTypeNone,
                 groupValue: state.separator,
                 controlAffinity: ListTileControlAffinity.leading,
@@ -59,7 +60,7 @@ class OptionView extends MyView {
                 }
             ),
             RadioListTile(
-                title: MyText( state, stringSeparatorUpper, fontSize: 15, color: 0x000000 ),
+                title: MyTextShadow( state, stringSeparatorUpper, fontSize: 15, color: 0x000000 ),
                 value: CalcModel.separatorTypeDash,
                 groupValue: state.separator,
                 controlAffinity: ListTileControlAffinity.leading,
@@ -68,7 +69,7 @@ class OptionView extends MyView {
                 }
             ),
             RadioListTile(
-                title: MyText( state, stringSeparatorLower, fontSize: 15, color: 0x000000 ),
+                title: MyTextShadow( state, stringSeparatorLower, fontSize: 15, color: 0x000000 ),
                 value: CalcModel.separatorTypeComma,
                 groupValue: state.separator,
                 controlAffinity: ListTileControlAffinity.leading,
@@ -101,7 +102,7 @@ class OptionView extends MyView {
 
             MyColumnSpace( state, 10 ),
 
-            MyText( state, stringImageX, fontSize: 15, color: 0x000000 ),
+            MyTextShadow( state, stringImageX, fontSize: 15, color: 0x000000 ),
             Slider(
               value: MyModel.app.imageX,
               min: -1.0,
@@ -110,7 +111,7 @@ class OptionView extends MyView {
               onChanged: state.onChangedImageX,
               onChangeEnd: state.onChangeEndImageX,
             ),
-            MyText( state, stringImageY, fontSize: 15, color: 0x000000 ),
+            MyTextShadow( state, stringImageY, fontSize: 15, color: 0x000000 ),
             Slider(
               value: MyModel.app.imageY,
               min: -1.0,

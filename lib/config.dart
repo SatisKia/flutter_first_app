@@ -6,6 +6,8 @@ import 'view_model/number_view_model.dart';
 import 'view_model/option_view_model.dart';
 
 class MyConfig {
+  static bool fullScreen = false;
+
   // アプリの仮想幅
   static int contentWidth = 320;
 
