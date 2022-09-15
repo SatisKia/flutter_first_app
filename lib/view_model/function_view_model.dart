@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// 振動機能
+import 'package:flutter_first_plugin/flutter_first_plugin.dart';
+
 import '../main.dart';
 import '../model.dart';
 import '../model/calc_model.dart';
@@ -38,7 +41,8 @@ class MyFunctionState extends MyState {
   }
 
   void vibrate(){
-    // TODO: 振動機能呼び出し
+    // 振動機能
+    FlutterFirstPlugin.vibrate();
   }
 
   void changeAngle(){
