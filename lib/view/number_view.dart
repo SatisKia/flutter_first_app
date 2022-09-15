@@ -91,7 +91,6 @@ class NumberView extends MyView {
       ] )
     ] );
 
-
     if( MyModel.app.imageFlag && MyModel.app.image != null ) {
       return Container(
           width: state.contentWidth,
