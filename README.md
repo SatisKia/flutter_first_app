@@ -1,9 +1,6 @@
 # flutter_first_app
 
-ビルド環境
-Android Studio Flamingo
-JDK 11
-でビルドを通すメモ
+ビルド環境Android Studio Flamingo＋JDK 11でビルドを通すメモ
 
 android\gradle\wrapper\gradle-wrapper.properties
 ```
