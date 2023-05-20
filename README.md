@@ -1,5 +1,10 @@
 # flutter_first_app
 
+ビルド環境
+Android Studio Flamingo
+JDK 11
+でビルドを通すメモ
+
 android\gradle\wrapper\gradle-wrapper.properties
 ```
 distributionUrl=https\://services.gradle.org/distributions/gradle-7.4-all.zip
