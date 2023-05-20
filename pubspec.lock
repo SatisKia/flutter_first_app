@@ -88,7 +88,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: cecf416dc4466bdac9ef342297ea9dca7a9500f8
+      resolved-ref: "73eb59cea73d905a937a7943defb43222f6a9f8f"
       url: "https://github.com/SatisKia/flutter_first_plugin.git"
     source: git
     version: "0.0.1"
