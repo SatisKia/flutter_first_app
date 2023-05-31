@@ -1,6 +1,6 @@
 # flutter_first_app
 
-ƒrƒ‹ƒhŠÂ‹«Android Studio Flamingo{JDK 11‚Åƒrƒ‹ƒh‚ğ’Ê‚·ƒƒ‚
+ãƒ“ãƒ«ãƒ‰ç’°å¢ƒAndroid Studio Flamingoï¼‹JDK 11ã§ãƒ“ãƒ«ãƒ‰ã‚’é€šã™ãƒ¡ãƒ¢
 
 android\gradle\wrapper\gradle-wrapper.properties
 ```
