@@ -60,8 +60,8 @@ class NumberView extends MyView {
         MyCalcButtonLTShadow( state, "FNC", 80, buttonHeight1, 25, 0xFFFFFF, 0xFFA0A0, state.onButtonFunction )
       ] ),
       MyRow( children: [
-        MyCalcButtonRBShadow( state, "CE", 80, buttonHeight2, 32, MyModel.calc.errorFlag ? 0xFFFFFF : 0xFF8080, MyModel.calc.errorFlag ? 0xFFA0A0 : 0xFFFFFF, state.onButtonCE ),
-        MyCalcButtonRBShadow( state, "C", 80, buttonHeight2, 32, MyModel.calc.errorFlag ? 0xFFFFFF : 0xFF8080, MyModel.calc.errorFlag ? 0xFFA0A0 : 0xFFFFFF, state.onButtonC ),
+        MyModel.calc.errorFlag ? MyCalcButtonLTShadow( state, "CE", 80, buttonHeight2, 32, 0xFFFFFF, 0xFFA0A0, state.onButtonCE ) : MyCalcButtonRBShadow( state, "CE", 80, buttonHeight2, 32, 0xFF8080, 0xFFFFFF, state.onButtonCE ),
+        MyModel.calc.errorFlag ? MyCalcButtonLTShadow( state, "C", 80, buttonHeight2, 32, 0xFFFFFF, 0xFFA0A0, state.onButtonC ) : MyCalcButtonRBShadow( state, "C", 80, buttonHeight2, 32, 0xFF8080, 0xFFFFFF, state.onButtonC ),
         MyCalcButtonRBShadow( state, "DEL", 80, buttonHeight2, 32, 0x000000, 0xFFFFFF, state.onButtonDEL ),
         MyCalcButtonRBShadow( state, "÷", 80, buttonHeight2, 40, 0x000000, 0xFFFFFF, state.onButtonDiv )
       ] ),
