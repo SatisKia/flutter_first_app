@@ -22,7 +22,7 @@ dependencies:
   # ローカライゼーション
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0
+  intl: ^0.18.0
 
   # 振動機能
   flutter_first_plugin:
