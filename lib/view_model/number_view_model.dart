@@ -59,7 +59,7 @@ class MyNumberState extends MyState {
 
   void vibrate(){
     // 振動機能
-    FlutterFirstPlugin.vibrate();
+    FlutterFirstPlugin().vibrate();
   }
 
   void onButtonNumber( Function() function ){
